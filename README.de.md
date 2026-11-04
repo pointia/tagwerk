@@ -20,16 +20,73 @@ Mehr in [`docs/screenshots/`](docs/screenshots/), hell und dunkel.
 
 ## Auf einem Server installieren
 
+Es braucht nur Docker mit Compose, keinen Checkout. In einem leeren Ordner:
+
 ```bash
-git clone https://github.com/pointia/tagwerk.git && cd tagwerk/deploy
-cp .env.example .env      # Hostname, APP_KEY, DB_PASSWORD — siehe Anleitung
+cat > compose.yaml <<'EOF'
+services:
+  app:
+    image: ghcr.io/tagwerk-family/tagwerk:0.1
+    restart: unless-stopped
+    depends_on: { db: { condition: service_healthy } }
+    environment:
+      APP_NAME: Tagwerk
+      APP_URL: https://${TAGWERK_HOST}
+      APP_KEY: ${APP_KEY}
+      LOG_CHANNEL: stderr
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_DATABASE: tagwerk
+      DB_USERNAME: tagwerk
+      DB_PASSWORD: ${DB_PASSWORD}
+      SESSION_DRIVER: database
+      SESSION_ENCRYPT: "true"
+      SESSION_SECURE_COOKIE: "true"
+      TAGWERK_TRUSTED_PROXIES: 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+      TAGWERK_MAIL: "off"
+    volumes: [storage:/var/www/html/storage]
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: tagwerk
+      POSTGRES_USER: tagwerk
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tagwerk -d tagwerk"]
+      interval: 5s
+      retries: 20
+    volumes: [db:/var/lib/postgresql/data]
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    command: caddy reverse-proxy --from ${TAGWERK_HOST} --to app:8080
+    ports: ["80:80", "443:443"]
+    volumes: [caddy:/data]
+volumes: { storage: {}, db: {}, caddy: {} }
+EOF
+
+cat > .env <<EOF
+TAGWERK_HOST=tagwerk.example.org
+APP_KEY=base64:$(openssl rand -base64 32)
+DB_PASSWORD=$(openssl rand -hex 24)
+EOF
+
 docker compose up -d
+docker compose exec app su-exec www-data php artisan tagwerk:create-operator Admin du@example.org
 ```
 
-Das Image `ghcr.io/pointia/tagwerk` läuft auf amd64 und arm64 (Raspberry
-Pi 4/5). Caddy davor holt das HTTPS-Zertifikat, oder Tagwerk steht hinter
-einem Traefik oder Proxy, den du schon betreibst. Schritt für Schritt, mit
-Aktualisieren, Sicherung und Fehlersuche:
+`TAGWERK_HOST` ist der öffentliche Name deines Servers: Ports 80 und 443
+müssen ihn erreichen, Caddy holt das HTTPS-Zertifikat selbst. Danach
+`https://<host>/admin` öffnen, mit dem Betriebskonto anmelden und den ersten
+Haushalt anlegen. Die `.env` gut aufheben: Ohne `APP_KEY` sind die
+gespeicherten Zugangsdaten nicht mehr lesbar.
+
+Das Image `ghcr.io/tagwerk-family/tagwerk` läuft auf amd64 und arm64
+(Raspberry Pi 4/5); `:0.1` folgt den Fehlerbehebungen von 0.1. So läuft
+Tagwerk ohne Mail (Konten bekommen ihr Passwort im Admin) und ohne
+Echtzeit. Mail, Plugins, Traefik oder ein Proxy, den du schon betreibst,
+Aktualisieren ohne Ausfall, Sicherung und Fehlersuche:
 **[`docs/installation.de.md`](docs/installation.de.md)**.
 
 ## Schnellstart (Entwicklung)

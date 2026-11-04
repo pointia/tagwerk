@@ -4,7 +4,7 @@
     "type": "project",
     "description": "Tagwerk: a family calendar for a wall tablet and the family's phones, several households on one server.",
     "keywords": ["family", "calendar", "wall tablet", "kiosk", "self-hosted"],
-    "homepage": "https://github.com/pointia/tagwerk",
+    "homepage": "https://github.com/tagwerk-family/tagwerk",
     "license": "PolyForm-Shield-1.0.0",
     "require": {
         "php": "^8.5",

@@ -1,19 +1,19 @@
 # tagwerk/plugin-api
 
-The contracts, data objects and helpers a [Tagwerk](https://github.com/pointia/tagwerk)
+The contracts, data objects and helpers a [Tagwerk](https://github.com/tagwerk-family/tagwerk)
 plugin talks to: providers, dashboard widgets, areas, extensions, photo rules.
 
 MIT licensed — a plugin built only on this package may carry any licence its
 author chooses. Tagwerk itself is under PolyForm Shield 1.0.0.
 
-Start with the guide, [Writing a Tagwerk plugin](https://github.com/pointia/tagwerk/blob/master/docs/plugins.md),
+Start with the guide, [Writing a Tagwerk plugin](https://github.com/tagwerk-family/tagwerk/blob/master/docs/plugins.md),
 or let a Tagwerk checkout write a package for you:
 
 ```bash
 php artisan tagwerk:make-plugin acme/waste --widget
 ```
 
-Or start from the [template repository](https://github.com/pointia/tagwerk-plugin-template)
+Or start from the [template repository](https://github.com/tagwerk-family/tagwerk-plugin-template)
 (“Use this template”), which needs no Tagwerk checkout.
 
 Test your plugin in its own repository with the testkit:

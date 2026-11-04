@@ -2300,7 +2300,7 @@ describe the procedures.
   setting up several tablets is not guessing.
 - **Two setups, one image.** `compose.yaml` builds on the server behind
   Traefik; `compose.standalone.yaml` (the default in `.env.example`) runs
-  `ghcr.io/pointia/tagwerk` behind Caddy (`deploy/Caddyfile`,
+  `ghcr.io/tagwerk-family/tagwerk` behind Caddy (`deploy/Caddyfile`,
   `TAGWERK_SITE` a host name for Let's Encrypt or `:80` behind another
   proxy). `COMPOSE_FILE` in `deploy/.env` picks one, so `backup.sh` and
   `rollout.sh` need no flag; `rollout.sh` pulls an image from `ghcr.io` and

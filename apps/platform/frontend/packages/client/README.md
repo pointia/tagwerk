@@ -1,6 +1,6 @@
 # @tagwerk/client
 
-Build your own frontend for [Tagwerk](https://github.com/pointia/tagwerk), the
+Build your own frontend for [Tagwerk](https://github.com/tagwerk-family/tagwerk), the
 family calendar for wall tablets and phones. This package talks to the
 server and carries the rules the official app applies, without a framework:
 use it from Vue, React, Svelte or plain TypeScript.
@@ -50,7 +50,7 @@ catch (error) {
   never with the device's own.
 
 Starting point: the
-[`tagwerk-frontend-template`](https://github.com/pointia/tagwerk-frontend-template).
+[`tagwerk-frontend-template`](https://github.com/tagwerk-family/tagwerk-frontend-template).
 The guide is `docs/frontends.md` in the Tagwerk repository.
 
 MIT licensed.

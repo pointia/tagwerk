@@ -9623,7 +9623,7 @@
             "dist": {
                 "type": "path",
                 "url": "packages/plugin-api",
-                "reference": "b7aa865befc220f3916cd0adbec9dab3c6d94c22"
+                "reference": "a1a07ad0b9a93fa1dcf190ec19e7a4811aa36ede"
             },
             "require": {
                 "filament/filament": "^5.10.1",
@@ -9646,11 +9646,11 @@
                 "MIT"
             ],
             "description": "Contracts and helpers for Tagwerk plugins",
-            "homepage": "https://github.com/pointia/tagwerk",
+            "homepage": "https://github.com/tagwerk-family/tagwerk",
             "support": {
-                "issues": "https://github.com/pointia/tagwerk/issues",
-                "source": "https://github.com/pointia/tagwerk/tree/master/apps/platform/packages/plugin-api",
-                "docs": "https://github.com/pointia/tagwerk/blob/master/docs/plugins.md"
+                "issues": "https://github.com/tagwerk-family/tagwerk/issues",
+                "source": "https://github.com/tagwerk-family/tagwerk/tree/master/apps/platform/packages/plugin-api",
+                "docs": "https://github.com/tagwerk-family/tagwerk/blob/master/docs/plugins.md"
             },
             "transport-options": {
                 "symlink": true,

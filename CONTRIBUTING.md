@@ -27,7 +27,7 @@ which is why a pull request cannot be merged without it.
   that cost time once already. The reasons behind the
   design live in [`docs/architecture.md`](docs/architecture.md).
 - Questions and ideas go to
-  [Discussions](https://github.com/pointia/tagwerk/discussions), not issues.
+  [Discussions](https://github.com/tagwerk-family/tagwerk/discussions), not issues.
 
 ## Plugins instead of pull requests
 

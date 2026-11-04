@@ -38,7 +38,7 @@ one container, PostgreSQL beside it.
 |---|---|---|
 | For | a home server, a NAS, a small VPS | a server that already runs Traefik |
 | HTTPS | Caddy in the stack fetches the certificate, or a proxy you already run | Traefik's certificate resolver |
-| Image | the published `ghcr.io/pointia/tagwerk` (or built from the source) | built from the source on the server |
+| Image | the published `ghcr.io/tagwerk-family/tagwerk` (or built from the source) | built from the source on the server |
 | Ports | 80 and 443 (or one port of your choice behind your own proxy) | none; Traefik reaches the container over its network |
 
 If you are unsure, take **standalone**.
@@ -48,7 +48,7 @@ If you are unsure, take **standalone**.
 ### 1. Get the files
 
 ```bash
-git clone https://github.com/pointia/tagwerk.git /opt/tagwerk
+git clone https://github.com/tagwerk-family/tagwerk.git /opt/tagwerk
 cd /opt/tagwerk/deploy
 cp .env.example .env
 ```

@@ -7,6 +7,14 @@ tokens; such a change is named here.
 
 ## [Unreleased]
 
+### Changed
+
+- **The project lives at `github.com/tagwerk-family`, the image at
+  `ghcr.io/tagwerk-family/tagwerk`.** Old addresses under `pointia` redirect
+  for git, not for the image: set `TAGWERK_IMAGE` anew.
+- **Installing needs no checkout.** The README's setup is a `compose.yaml`
+  and a `.env` written in place; the image carries everything else.
+
 ## [0.1.0] — 2026-11-04
 
 The first release. Everything a family uses from day to day, on a wall

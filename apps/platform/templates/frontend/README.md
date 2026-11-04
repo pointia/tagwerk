@@ -1,6 +1,6 @@
 # A Tagwerk frontend
 
-A starting point for your own interface to [Tagwerk](https://github.com/pointia/tagwerk)
+A starting point for your own interface to [Tagwerk](https://github.com/tagwerk-family/tagwerk)
 — for a wall tablet, a phone, an e-ink display, whatever your family needs.
 It is a plain Vite + TypeScript app on [`@tagwerk/client`](https://www.npmjs.com/package/@tagwerk/client):
 pair a wall or sign in, then the coming week, reloaded when something changes.

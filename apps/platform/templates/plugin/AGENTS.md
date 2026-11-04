@@ -1,7 +1,7 @@
 # AGENTS.md — acme/example
 
-A [Tagwerk](https://github.com/pointia/tagwerk) plugin. Read the guide before
-changing anything: https://github.com/pointia/tagwerk/blob/master/docs/plugins.md
+A [Tagwerk](https://github.com/tagwerk-family/tagwerk) plugin. Read the guide before
+changing anything: https://github.com/tagwerk-family/tagwerk/blob/master/docs/plugins.md
 
 ## Rules
 

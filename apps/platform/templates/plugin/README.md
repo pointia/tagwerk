@@ -1,6 +1,6 @@
 # acme/example
 
-A [Tagwerk](https://github.com/pointia/tagwerk) plugin.
+A [Tagwerk](https://github.com/tagwerk-family/tagwerk) plugin.
 
 ## Install
 

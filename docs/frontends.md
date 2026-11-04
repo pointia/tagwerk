@@ -9,7 +9,7 @@ simpler: a [design pack](plugins.md#design-packs).
 
 ## Start
 
-Open [`tagwerk-frontend-template`](https://github.com/pointia/tagwerk-frontend-template),
+Open [`tagwerk-frontend-template`](https://github.com/tagwerk-family/tagwerk-frontend-template),
 press **Use template**, then:
 
 ```bash

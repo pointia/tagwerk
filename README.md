@@ -20,16 +20,74 @@ More in [`docs/screenshots/`](docs/screenshots/), light and dark.
 
 ## Install on a server
 
+Docker with Compose is all it takes — no checkout. In an empty folder:
+
 ```bash
-git clone https://github.com/pointia/tagwerk.git && cd tagwerk/deploy
-cp .env.example .env      # host name, APP_KEY, DB_PASSWORD — see the guide
+cat > compose.yaml <<'EOF'
+services:
+  app:
+    image: ghcr.io/tagwerk-family/tagwerk:0.1
+    restart: unless-stopped
+    depends_on: { db: { condition: service_healthy } }
+    environment:
+      APP_NAME: Tagwerk
+      APP_URL: https://${TAGWERK_HOST}
+      APP_KEY: ${APP_KEY}
+      LOG_CHANNEL: stderr
+      DB_CONNECTION: pgsql
+      DB_HOST: db
+      DB_DATABASE: tagwerk
+      DB_USERNAME: tagwerk
+      DB_PASSWORD: ${DB_PASSWORD}
+      SESSION_DRIVER: database
+      SESSION_ENCRYPT: "true"
+      SESSION_SECURE_COOKIE: "true"
+      TAGWERK_TRUSTED_PROXIES: 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+      TAGWERK_MAIL: "off"
+    volumes: [storage:/var/www/html/storage]
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: tagwerk
+      POSTGRES_USER: tagwerk
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tagwerk -d tagwerk"]
+      interval: 5s
+      retries: 20
+    volumes: [db:/var/lib/postgresql/data]
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    command: caddy reverse-proxy --from ${TAGWERK_HOST} --to app:8080
+    ports: ["80:80", "443:443"]
+    volumes: [caddy:/data]
+volumes: { storage: {}, db: {}, caddy: {} }
+EOF
+
+cat > .env <<EOF
+TAGWERK_HOST=tagwerk.example.org
+APP_KEY=base64:$(openssl rand -base64 32)
+DB_PASSWORD=$(openssl rand -hex 24)
+EOF
+
 docker compose up -d
+docker compose exec app su-exec www-data php artisan tagwerk:create-operator Admin you@example.org
 ```
 
-The image `ghcr.io/pointia/tagwerk` runs on amd64 and arm64 (Raspberry Pi
-4/5). Caddy in front fetches the HTTPS certificate, or Tagwerk sits behind
-a Traefik or proxy you already run. Step by step, with updates, backup and
-troubleshooting: **[`docs/installation.md`](docs/installation.md)**.
+`TAGWERK_HOST` is your server's public name: ports 80 and 443 must reach
+it, and Caddy fetches the HTTPS certificate itself. Then open
+`https://<host>/admin`, sign in with the operator and create the first
+household. Keep `.env` safe: without `APP_KEY` the stored credentials cannot
+be read.
+
+The image `ghcr.io/tagwerk-family/tagwerk` runs on amd64 and arm64
+(Raspberry Pi 4/5); `:0.1` follows the bug fixes of 0.1. This setup runs
+without mail (accounts get a password in the admin) and without realtime.
+Mail, plugins, Traefik or a proxy you already run, updates without
+downtime, backup and troubleshooting:
+**[`docs/installation.md`](docs/installation.md)**.
 
 ## Quick start (development)
 

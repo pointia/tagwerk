@@ -40,7 +40,7 @@ einem Container, PostgreSQL daneben.
 |---|---|---|
 | Für | Heimserver, NAS, kleiner VPS | einen Server, auf dem Traefik schon läuft |
 | HTTPS | Caddy im Stack holt das Zertifikat, oder ein Proxy, den du schon betreibst | Zertifikats-Resolver von Traefik |
-| Image | das veröffentlichte `ghcr.io/pointia/tagwerk` (oder aus dem Quellcode gebaut) | am Server aus dem Quellcode gebaut |
+| Image | das veröffentlichte `ghcr.io/tagwerk-family/tagwerk` (oder aus dem Quellcode gebaut) | am Server aus dem Quellcode gebaut |
 | Ports | 80 und 443 (oder ein beliebiger Port hinter deinem eigenen Proxy) | keine; Traefik erreicht den Container über sein Netzwerk |
 
 Im Zweifel: **eigenständig**.
@@ -50,7 +50,7 @@ Im Zweifel: **eigenständig**.
 ### 1. Dateien holen
 
 ```bash
-git clone https://github.com/pointia/tagwerk.git /opt/tagwerk
+git clone https://github.com/tagwerk-family/tagwerk.git /opt/tagwerk
 cd /opt/tagwerk/deploy
 cp .env.example .env
 ```

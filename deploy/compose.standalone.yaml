@@ -26,7 +26,7 @@ name: tagwerk
 
 services:
   app:
-    image: ${TAGWERK_IMAGE:-ghcr.io/pointia/tagwerk:latest}
+    image: ${TAGWERK_IMAGE:-ghcr.io/tagwerk-family/tagwerk:latest}
     build:
       context: ..
       dockerfile: deploy/Dockerfile
@@ -82,7 +82,7 @@ services:
 
   reverb:
     profiles: [realtime]
-    image: ${TAGWERK_IMAGE:-ghcr.io/pointia/tagwerk:latest}
+    image: ${TAGWERK_IMAGE:-ghcr.io/tagwerk-family/tagwerk:latest}
     restart: unless-stopped
     env_file: .env
     command: ["su-exec", "www-data", "php", "artisan", "reverb:start", "--host=0.0.0.0", "--port=8080"]

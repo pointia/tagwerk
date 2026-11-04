@@ -14,7 +14,7 @@ use them.
 ## Start in one command
 
 Without a Tagwerk checkout: open
-[`tagwerk-plugin-template`](https://github.com/pointia/tagwerk-plugin-template),
+[`tagwerk-plugin-template`](https://github.com/tagwerk-family/tagwerk-plugin-template),
 press **Use this template**, rename `acme/example` and the `Acme\Example`
 namespace to your own, and run `composer install && vendor/bin/phpunit`.
 
@@ -464,7 +464,7 @@ tests; the list is no review of their code (see *Security*).
 ## Good first plugins
 
 Ideas that fit the API as it is, smallest first. Say in
-[Discussions](https://github.com/pointia/tagwerk/discussions) which one you
+[Discussions](https://github.com/tagwerk-family/tagwerk/discussions) which one you
 take, so two people do not build the same.
 
 - **Your language** — `--language=<code>` writes the pack; translating
@@ -488,9 +488,9 @@ take, so two people do not build the same.
 ## Help
 
 - Questions, ideas and showing what you built:
-  [Discussions](https://github.com/pointia/tagwerk/discussions).
+  [Discussions](https://github.com/tagwerk-family/tagwerk/discussions).
 - A bug in the API or the guide: an
-  [issue](https://github.com/pointia/tagwerk/issues/new/choose).
+  [issue](https://github.com/tagwerk-family/tagwerk/issues/new/choose).
 - A security problem: never an issue — see
   [`SECURITY.md`](../SECURITY.md).
 - [`/llms.txt`](../llms.txt) points coding assistants at what they need.

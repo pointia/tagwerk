@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use Tagwerk\PluginApi\Themes\Theme;
+
+/**
+ * A design for Tagwerk: colours, font and corners for wall and phone. The
+ * stylesheet sets Tagwerk's design tokens and nothing else; the test checks
+ * it the way Tagwerk will.
+ */
+final class {{ class }}Theme implements Theme
+{
+    /** What the settings show. */
+    public function name(): string
+    {
+        return '{{ title }}';
+    }
+
+    public function stylesheet(): string
+    {
+        return dirname(__DIR__).'/resources/theme.css';
+    }
+}

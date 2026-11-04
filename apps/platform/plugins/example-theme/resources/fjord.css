@@ -1,0 +1,62 @@
+/*
+ * Fjord: cool water, rounder corners.
+ *
+ * A design pack sets Tagwerk's tokens and nothing else — the list is
+ * `resources/reference/design.json` in tagwerk/plugin-api. Light on
+ * `:root[data-design]`, dark with `[data-theme="dark"]`; both are required.
+ * Each rule weighs what the core's rule with the same attributes weighs and
+ * wins by coming later. Fonts and corners need saying only once: the core
+ * sets them alike in both.
+ */
+
+:root[data-design] {
+  --corner-lg: 0.75rem;
+  --corner-xl: 1rem;
+  --corner-2xl: 1.25rem;
+  --corner-3xl: 1.5rem;
+
+  --canvas: #f3f7f9;
+  --surface: #ffffff;
+  --surface-2: #e7eef2;
+  --surface-3: #d9e3e9;
+  --line: #d6e0e6;
+  --ink: #0f1f2a;
+  --ink-2: #3b5260;
+  --ink-3: #536977;
+  --accent: #0a6680;
+  --accent-soft: #e2f1f5;
+  --accent-ink: #ffffff;
+  --today: #0a6680;
+  --today-ink: #ffffff;
+}
+
+:root[data-design][data-theme="dark"] {
+  --canvas: #0b1318;
+  --surface: #131f27;
+  --surface-2: #1b2932;
+  --surface-3: #25353f;
+  --line: #213039;
+  --ink: #e5eef2;
+  --ink-2: #a8bac4;
+  --ink-3: #8a9ea9;
+  --accent: #7cc6dc;
+  --accent-soft: #14303a;
+  --accent-ink: #0b1318;
+  --today: #7cc6dc;
+  --today-ink: #0b1318;
+}
+
+/*
+ * The glass look keeps its translucent surfaces; only the gradient turns
+ * cool. `[data-backdrop]` narrows as far as the core's gradients do, so this
+ * one replaces whichever the household picked.
+ */
+:root[data-design][data-look="glass"][data-backdrop] {
+  --canvas: #e4eff3;
+  --backdrop: radial-gradient(at 10% 10%, #9fd6e4 0, transparent 55%), radial-gradient(at 90% 15%, #b3c7f0 0, transparent 50%), radial-gradient(at 45% 100%, #bfe6dd 0, transparent 60%);
+}
+
+:root[data-design][data-look="glass"][data-theme="dark"][data-backdrop] {
+  --canvas: #0b1519;
+  --backdrop: radial-gradient(at 10% 10%, #0f3f4b 0, transparent 55%), radial-gradient(at 90% 15%, #1a2c55 0, transparent 50%), radial-gradient(at 45% 100%, #0f3a33 0, transparent 60%);
+}

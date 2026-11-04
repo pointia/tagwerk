@@ -1,0 +1,189 @@
+/*
+ * The admin panel dressed like the wall: same font, same near-white surface,
+ * same soft roundings.
+ *
+ * Colours come from ->colors() in AdminPanelProvider; this file only holds
+ * what Filament has no setting for. A static file instead of a Vite theme:
+ * Laravel has no Node toolchain of its own, and a few rules do not justify
+ * one.
+ *
+ * The font sits next to this file under fonts/tagwerk (SIL OFL 1.1, licence
+ * text there) and comes from the frontend's @fontsource package.
+ */
+
+@font-face {
+    font-family: "Plus Jakarta Sans Variable";
+    font-style: normal;
+    font-display: swap;
+    font-weight: 200 800;
+    src: url("../fonts/tagwerk/plus-jakarta-sans-latin-wght-normal.woff2") format("woff2-variations");
+}
+
+/* Headings set tighter, as on the wall. */
+.fi-header-heading,
+.fi-simple-header-heading,
+.fi-section-header-heading,
+.fi-modal-heading,
+.fi-ta-header-heading,
+.fi-wi-stats-overview-stat-value {
+    letter-spacing: -0.01em;
+    word-spacing: 0.06em;
+}
+
+.fi-header-heading,
+.fi-simple-header-heading {
+    font-weight: 600;
+}
+
+/* Roundings like the wall's cards. */
+.fi-section,
+.fi-ta-ctn,
+.fi-simple-main {
+    border-radius: 0.75rem;
+}
+
+/* Light/dark switch in the top bar, a segmented control as on the wall. */
+.tagwerk-theme {
+    display: inline-flex;
+    gap: 0.125rem;
+    padding: 0.1875rem;
+    margin-inline-end: 0.5rem;
+    border-radius: 999px;
+    background: var(--gray-100);
+}
+
+.dark .tagwerk-theme {
+    background: var(--gray-800);
+}
+
+.tagwerk-theme-button {
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 999px;
+    color: var(--gray-600);
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.tagwerk-theme-button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.tagwerk-theme-button:hover {
+    color: var(--gray-900);
+}
+
+.dark .tagwerk-theme-button {
+    color: var(--gray-400);
+}
+
+.dark .tagwerk-theme-button:hover {
+    color: var(--gray-100);
+}
+
+.tagwerk-theme-button.is-selected {
+    background: var(--color-white);
+    color: var(--primary-600);
+    box-shadow: 0 1px 2px rgb(0 0 0 / 0.1);
+}
+
+.dark .tagwerk-theme-button.is-selected {
+    background: var(--gray-700);
+    color: var(--primary-300);
+}
+
+.tagwerk-theme-button:focus-visible {
+    outline: 2px solid var(--primary-500);
+    outline-offset: 2px;
+}
+
+/* A household notice: trial, read-only, whatever a plugin says. */
+.tagwerk-household-notice {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--primary-600);
+    color: var(--color-white);
+    font-size: 0.875rem;
+}
+
+.tagwerk-household-notice[data-level="blocking"] {
+    background: var(--danger-600);
+}
+
+.tagwerk-household-notice a,
+.tagwerk-household-notice button {
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* Support access: the operator inside another household. */
+.tagwerk-support-banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--warning-600);
+    color: var(--color-white);
+    font-size: 0.875rem;
+}
+
+.tagwerk-support-banner button {
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.tagwerk-support-switcher select {
+    border: 1px solid var(--gray-300);
+    border-radius: 0.5rem;
+    background: transparent;
+    padding: 0.25rem 2rem 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+.dark .tagwerk-support-switcher select {
+    border-color: var(--gray-700);
+}
+
+/* "Zur App" in the header: the way back to the family app. */
+.tagwerk-to-app {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary-600);
+    white-space: nowrap;
+}
+
+.tagwerk-to-app:hover {
+    background: var(--gray-100);
+}
+
+.dark .tagwerk-to-app {
+    color: var(--primary-400);
+}
+
+.dark .tagwerk-to-app:hover {
+    background: var(--gray-800);
+}
+
+/* Social sign-in plugin: its provider buttons below the login form. */
+.tw-social-login {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+.tw-social-login .fi-btn {
+    width: 100%;
+}

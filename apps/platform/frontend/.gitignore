@@ -1,0 +1,12 @@
+node_modules/
+.nuxt/
+.output/
+.data/
+# Without a slash: nuxt generate creates dist as a symlink, and dist/ only
+# matches directories.
+dist
+test-results/
+playwright-report/
+.auth/
+.env
+*.log

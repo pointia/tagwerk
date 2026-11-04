@@ -1,0 +1,148 @@
+{
+    "tokens": {
+        "--accent": {
+            "light": "#c2410c",
+            "dark": "#fdba74"
+        },
+        "--accent-ink": {
+            "light": "#ffffff",
+            "dark": "#101012"
+        },
+        "--accent-soft": {
+            "light": "#fdf1e9",
+            "dark": "#33231a"
+        },
+        "--backdrop": {
+            "light": null,
+            "dark": null
+        },
+        "--canvas": {
+            "light": "#fafaf9",
+            "dark": "#101012"
+        },
+        "--corner-2xl": {
+            "light": "0.75rem",
+            "dark": null
+        },
+        "--corner-3xl": {
+            "light": "0.875rem",
+            "dark": null
+        },
+        "--corner-lg": {
+            "light": "0.5rem",
+            "dark": null
+        },
+        "--corner-xl": {
+            "light": "0.625rem",
+            "dark": null
+        },
+        "--danger": {
+            "light": "#b42318",
+            "dark": "#fda29b"
+        },
+        "--danger-soft": {
+            "light": "#fee4e2",
+            "dark": "#3b2220"
+        },
+        "--elevation": {
+            "light": "0 1px 2px rgb(16 16 18 / 0.06), 0 8px 24px -12px rgb(16 16 18 / 0.16)",
+            "dark": "0 0 0 1px rgb(255 255 255 / 0.04)"
+        },
+        "--elevation-floating": {
+            "light": "0 2px 6px rgb(16 16 18 / 0.08), 0 28px 64px -24px rgb(16 16 18 / 0.32)",
+            "dark": "0 0 0 1px rgb(255 255 255 / 0.07), 0 28px 64px -24px rgb(0 0 0 / 0.8)"
+        },
+        "--field": {
+            "light": null,
+            "dark": null
+        },
+        "--font-body": {
+            "light": "\"Plus Jakarta Sans Variable\", ui-sans-serif, system-ui, sans-serif",
+            "dark": null
+        },
+        "--font-heading": {
+            "light": "\"Plus Jakarta Sans Variable\", ui-sans-serif, system-ui, sans-serif",
+            "dark": null
+        },
+        "--glass-floating": {
+            "light": null,
+            "dark": null
+        },
+        "--ink": {
+            "light": "#1a1a18",
+            "dark": "#ededef"
+        },
+        "--ink-2": {
+            "light": "#55554f",
+            "dark": "#b0b0b6"
+        },
+        "--ink-3": {
+            "light": "#6a6a63",
+            "dark": "#92929a"
+        },
+        "--line": {
+            "light": "#e3e3de",
+            "dark": "#2a2a2e"
+        },
+        "--points": {
+            "light": "#fef3c7",
+            "dark": "#3a2f14"
+        },
+        "--points-ink": {
+            "light": "#92400e",
+            "dark": "#fde68a"
+        },
+        "--scrim": {
+            "light": "rgb(16 16 18 / 0.45)",
+            "dark": "rgb(0 0 0 / 0.6)"
+        },
+        "--star": {
+            "light": "#e8a200",
+            "dark": "#fcc419"
+        },
+        "--success": {
+            "light": "#067647",
+            "dark": "#75e0a7"
+        },
+        "--success-soft": {
+            "light": "#dcfae6",
+            "dark": "#1c3329"
+        },
+        "--surface": {
+            "light": "#ffffff",
+            "dark": "#1a1a1d"
+        },
+        "--surface-2": {
+            "light": "#efefec",
+            "dark": "#232327"
+        },
+        "--surface-3": {
+            "light": "#e4e4df",
+            "dark": "#2e2e33"
+        },
+        "--tint-soft": {
+            "light": null,
+            "dark": null
+        },
+        "--tint-solid": {
+            "light": null,
+            "dark": null
+        },
+        "--today": {
+            "light": "#c2410c",
+            "dark": "#fdba74"
+        },
+        "--today-ink": {
+            "light": "#ffffff",
+            "dark": "#101012"
+        },
+        "--warning": {
+            "light": "#fef3c7",
+            "dark": "#3a2f14"
+        },
+        "--warning-ink": {
+            "light": "#92400e",
+            "dark": "#fde68a"
+        }
+    }
+}

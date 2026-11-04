@@ -1,0 +1,9 @@
+{
+    "AI assistants (MCP)": "KI-Assistenten (MCP)",
+    "MCP": "MCP",
+    "Lets an AI assistant read and change calendar, tasks, lists and meal plan with an API token.": "Lässt einen KI-Assistenten mit einem API-Token Kalender, Aufgaben, Listen und Essensplan lesen und ändern.",
+    "Use a token from API access.": "Bitte ein Token aus „API-Zugang“ verwenden.",
+    "This account may not do that.": "Dieses Konto darf das nicht.",
+    "Not found, or the area is switched off for this household.": "Nicht gefunden, oder der Bereich ist für diesen Haushalt ausgeschaltet.",
+    "The server could not do that (:status).": "Der Server konnte das nicht ausführen (:status)."
+}

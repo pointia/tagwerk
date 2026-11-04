@@ -1,0 +1,23 @@
+services:
+  valkey:
+    container_name: ddev-${DDEV_SITENAME}-valkey
+    image: valkey/valkey:8-alpine
+    restart: "no"
+    expose:
+      - "6379"
+    labels:
+      com.ddev.site-name: ${DDEV_SITENAME}
+      com.ddev.approot: ${DDEV_APPROOT}
+    volumes:
+      - valkey-data:/data
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 5s
+      retries: 10
+
+  web:
+    depends_on:
+      - valkey
+
+volumes:
+  valkey-data:

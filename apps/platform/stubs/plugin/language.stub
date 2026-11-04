@@ -1,0 +1,42 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use Tagwerk\PluginApi\Languages\LanguagePack;
+
+/**
+ * A language for Tagwerk. The texts start as the English reference:
+ * translate the values in lang/ and frontend/, never the keys. Whatever
+ * stays untranslated or loses a placeholder shows in English.
+ */
+final class {{ class }}Language implements LanguagePack
+{
+    public function code(): string
+    {
+        return '{{ code }}';
+    }
+
+    /** In the language itself, so someone who cannot read the current one finds theirs. */
+    public function name(): string
+    {
+        return '{{ language }}';
+    }
+
+    /** BCP 47 for dates and numbers, e.g. fr-FR or fr-CH; the code alone works too. */
+    public function intlTag(): string
+    {
+        return '{{ code }}';
+    }
+
+    public function backendPath(): string
+    {
+        return dirname(__DIR__).'/lang';
+    }
+
+    public function frontendMessages(): string
+    {
+        return dirname(__DIR__).'/frontend/{{ code }}.json';
+    }
+}

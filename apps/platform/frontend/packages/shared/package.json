@@ -1,0 +1,21 @@
+{
+  "name": "shared",
+  "type": "module",
+  "private": true,
+  "main": "./nuxt.config.ts",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@fontsource-variable/plus-jakarta-sans": "^5.3.0",
+    "@nuxtjs/i18n": "10.5.0",
+    "@tagwerk/client": "workspace:*",
+    "lucide-vue-next": "^1.0.0",
+    "vue": "^3.5.44"
+  },
+  "devDependencies": {
+    "nuxt": "^4.6.3",
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5"
+  }
+}

@@ -1,0 +1,29 @@
+{
+    "name": "acme/example",
+    "description": "A Tagwerk plugin",
+    "type": "library",
+    "version": "0.1.0",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.5",
+        "tagwerk/plugin-api": "^0.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Acme\\Example\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Acme\\Example\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "tagwerk": {
+            "provider": "Acme\\Example\\ExamplePlugin"
+        }
+    }
+}

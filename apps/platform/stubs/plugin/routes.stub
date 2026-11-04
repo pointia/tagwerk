@@ -1,0 +1,11 @@
+<?php
+
+declare(strict_types=1);
+
+use Illuminate\Support\Facades\Route;
+use Tagwerk\PluginApi\Households\CurrentHousehold;
+
+// GET /api/{{ name }}/greeting — signed in, scoped to the household, 404 while the area is off.
+Route::get('/greeting', fn (CurrentHousehold $household): array => [
+    'household' => $household->name(),
+]);

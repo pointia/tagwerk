@@ -1,0 +1,99 @@
+# Tagwerk on a server. From this directory:
+#
+#   cp .env.example .env         # fill in, see comments there
+#   # Traefik must run with a network named "web" (TRAEFIK_NETWORK otherwise)
+#   docker compose build
+#   docker compose up -d
+#   docker compose exec app su-exec www-data php artisan tagwerk:create-operator Betrieb betrieb@example.org
+#   # then create households in /admin under Betrieb
+#
+# Updates without downtime (the old container serves until the new is healthy):
+#   git pull && ./rollout.sh
+#
+# Optional parts are profiles, started explicitly:
+#   docker compose --profile realtime up -d     # Reverb: instant updates
+#
+# `docker compose down -v` removes everything, database and uploads included.
+
+name: tagwerk
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+      args:
+        TAGWERK_AUDIT: ${TAGWERK_AUDIT:-strict}
+    image: tagwerk-app
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      TAGWERK_PHOTO_FOLDERS: /srv/photos
+      # Traefik arrives from its network, whatever range Docker picked. No
+      # host port: only containers on these networks reach the app at all.
+      TAGWERK_TRUSTED_PROXIES: ${TAGWERK_TRUSTED_PROXIES:-10.0.0.0/8,172.16.0.0/12,192.168.0.0/16}
+    # No basic auth in front: the browser's Authorization header would replace
+    # the token from the cookie, and neither wall nor phone could sign in.
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=${TRAEFIK_NETWORK:-web}"
+      - "traefik.http.services.tagwerk.loadbalancer.server.port=8080"
+      - "traefik.http.routers.tagwerk.rule=Host(`${TAGWERK_HOST:?TAGWERK_HOST missing in .env}`)"
+      - "traefik.http.routers.tagwerk.entrypoints=${TRAEFIK_ENTRYPOINT:-websecure}"
+      - "traefik.http.routers.tagwerk.tls=true"
+      - "traefik.http.routers.tagwerk.tls.certresolver=${TRAEFIK_CERTRESOLVER:-letsencrypt}"
+    volumes:
+      - storage:/var/www/html/storage
+      # One folder per household id; read only, Tagwerk never writes there.
+      - ${TAGWERK_PHOTO_FOLDERS_HOST:-./photos}:/srv/photos:ro
+    # Traefik routes only to a healthy container. With the image's 30-second
+    # interval the first check came half a minute after start, and every
+    # deploy stood that long on 404 although the app was long ready. During
+    # the start period it now checks every two seconds (Docker Engine 25+).
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:8080/up > /dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      start_period: 60s
+      start_interval: 2s
+    depends_on:
+      db:
+        condition: service_healthy
+    networks: [tagwerk, traefik]
+
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-tagwerk}
+      POSTGRES_USER: ${DB_USERNAME:-tagwerk}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD missing in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [tagwerk]
+
+  reverb:
+    profiles: [realtime]
+    image: tagwerk-app
+    restart: unless-stopped
+    env_file: .env
+    command: ["su-exec", "www-data", "php", "artisan", "reverb:start", "--host=0.0.0.0", "--port=8080"]
+    volumes:
+      - storage:/var/www/html/storage
+    depends_on: [app]
+    networks: [tagwerk]
+
+volumes:
+  pgdata:
+  storage:
+
+networks:
+  tagwerk:
+  traefik:
+    name: ${TRAEFIK_NETWORK:-web}
+    external: true

@@ -1,0 +1,37 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use Tagwerk\PluginApi\Areas\Area;
+
+/** An area a household switches on and off like a built-in one. */
+final class {{ class }}Area implements Area
+{
+    public function label(): string
+    {
+        return '{{ title }}';
+    }
+
+    public function shortLabel(): string
+    {
+        return '{{ title }}';
+    }
+
+    public function description(): string
+    {
+        return 'What this area is for.';
+    }
+
+    /** A Lucide icon name the app knows. */
+    public function icon(): string
+    {
+        return 'puzzle';
+    }
+
+    public function inMenu(): bool
+    {
+        return false;
+    }
+}

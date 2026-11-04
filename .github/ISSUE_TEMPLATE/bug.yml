@@ -1,0 +1,39 @@
+name: Bug
+description: Something does not work as it should.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What you did
+      description: Steps, as short as they can be.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened instead
+      description: Error messages, a screenshot, the log line.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Release, image tag or APP_VERSION.
+  - type: dropdown
+    id: where
+    attributes:
+      label: Where
+      options:
+        - Wall tablet
+        - Phone
+        - Admin
+        - Server / installation
+        - A plugin

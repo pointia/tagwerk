@@ -1,0 +1,43 @@
+/apps/platform/vendor/
+/apps/platform/node_modules/
+/apps/platform/public/build/
+/apps/platform/public/hot
+/apps/platform/public/storage
+/apps/platform/storage/*.key
+/apps/platform/storage/pail
+/apps/platform/.env
+/apps/platform/.env.backup
+/apps/platform/.phpunit.result.cache
+/apps/platform/auth.json
+
+node_modules/
+.pnpm-store/
+
+# Nuxt already ignores both through .gitignore files of its own in those
+# folders. Repeated here, because a lost .nuxt/.gitignore would otherwise
+# carry 3.4 MB of build artefacts into the history.
+.nuxt/
+.output/
+.DS_Store
+*.log
+
+.ddev/.dbimageBuild/
+.ddev/.ddev-docker-*.yaml
+.ddev/.global_commands/
+.ddev/.homeadditions/
+.ddev/.webimageBuild/
+.ddev/db_snapshots/
+.ddev/sequelpro.spf
+.ddev/import.yaml
+.ddev/traefik/
+
+# Claude Code worktrees, not project state
+.claude/worktrees/
+
+# Server deployment: secrets and local data
+deploy/.env
+deploy/backups/
+deploy/photos/
+
+# Working files of brainstorming and plan sessions
+.superpowers/

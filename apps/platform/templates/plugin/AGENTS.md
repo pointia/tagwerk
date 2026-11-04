@@ -1,0 +1,34 @@
+# AGENTS.md — acme/example
+
+A [Tagwerk](https://github.com/pointia/tagwerk) plugin. Read the guide before
+changing anything: https://github.com/pointia/tagwerk/blob/master/docs/plugins.md
+
+## Rules
+
+- Depend on `tagwerk/plugin-api` only. Never use a class under `App\` — it
+  belongs to Tagwerk's core, changes without notice and falls under its
+  licence.
+- The key `acme/example` is stored in households' data. Never change it.
+- Constructors do nothing: no database, no network. Tagwerk creates
+  providers and widgets on demand.
+- Widgets return `WidgetContent` (data), never HTML. `content()` must work
+  with empty settings: a tile from the picker starts without them.
+- `act()` receives any well-formed action name. Guard (`guarded()`) or
+  refuse names you did not offer.
+- Addresses a household typed in go through `Http\Outbound::householdGet()`
+  or `householdSend()`, never plain `Http::` — that would reach the
+  server's private network.
+- Never read credentials from `config/` or `.env`: one server holds many
+  households. Use `UsesCredentials`.
+- Texts go through `__()`; load `lang/` in `registerPlugin()`.
+- Code, comments and commit messages in English.
+
+## Commands
+
+```bash
+composer install
+vendor/bin/phpunit
+```
+
+`Tagwerk\PluginApi\Testing\PluginAssertions` holds the checks Tagwerk would
+otherwise only find on a wall (`assertWidgetWorks`, `assertPluginKey`).

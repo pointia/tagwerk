@@ -1,0 +1,20 @@
+{
+    "Webhooks": "Webhooks",
+    "Webhook": "Webhook",
+    "Tells other services — Home Assistant, say — what happens here.": "Meldet anderen Diensten – etwa Home Assistant –, was hier passiert.",
+    "Address": "Adresse",
+    "Must be reachable from the internet; addresses in a home network are refused.": "Muss aus dem Internet erreichbar sein; Adressen im Heimnetz werden abgelehnt.",
+    "This address is not reachable from the internet.": "Diese Adresse ist aus dem Internet nicht erreichbar.",
+    "Events": "Ereignisse",
+    "Active": "Aktiv",
+    "Last delivery": "Letzte Zustellung",
+    "Delivered": "Zugestellt",
+    "Failed": "Fehlgeschlagen",
+    "Pending": "Ausstehend",
+    "When": "Wann",
+    "Send test": "Test senden",
+    "New secret": "Neues Geheimnis",
+    "The receiver needs the new secret to check signatures.": "Der Empfänger braucht das neue Geheimnis, um Signaturen zu prüfen.",
+    "Copy the signing secret now — it is not shown again.": "Kopiere das Signatur-Geheimnis jetzt – es wird nicht noch einmal angezeigt.",
+    "Not reachable or not a public address.": "Nicht erreichbar oder keine öffentliche Adresse."
+}

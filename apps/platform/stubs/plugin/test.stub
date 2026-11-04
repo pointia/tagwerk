@@ -1,0 +1,20 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }}\Tests;
+
+use PHPUnit\Framework\TestCase;
+use {{ namespace }}\{{ class }}Plugin;
+use {{ namespace }}\{{ tested }};
+use Tagwerk\PluginApi\Testing\PluginAssertions;
+
+final class {{ class }}Test extends TestCase
+{
+    use PluginAssertions;
+
+    public function test_its_key_is_a_plugin_key(): void
+    {
+        $this->assertPluginKey({{ class }}Plugin::KEY);
+    }
+{{ checks }}}

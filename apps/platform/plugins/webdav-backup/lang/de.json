@@ -1,0 +1,14 @@
+{
+    "Backup to WebDAV": "Sicherung auf WebDAV",
+    "Every night, the database and all uploads go into a WebDAV folder — Nextcloud, a NAS or a storage box. Keep the .env with APP_KEY separately.": "Jede Nacht gehen Datenbank und alle Uploads in einen WebDAV-Ordner – Nextcloud, ein NAS oder eine Storage Box. Die .env mit APP_KEY getrennt davon aufbewahren.",
+    "WebDAV folder": "WebDAV-Ordner",
+    "User name": "Benutzername",
+    "Password": "Passwort",
+    "Stored — leave empty to keep it": "Gespeichert – leer lassen, um es zu behalten",
+    "Time (server time)": "Uhrzeit (Serverzeit)",
+    "Keep for days": "Tage aufbewahren",
+    "Last backup": "Letzte Sicherung",
+    "Not yet": "Noch keine",
+    "Written: :files. Removed: :count.": "Geschrieben: :files. Entfernt: :count.",
+    "The WebDAV folder answered :status.": "Der WebDAV-Ordner antwortete mit :status."
+}

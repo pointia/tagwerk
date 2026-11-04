@@ -1,0 +1,495 @@
+/*
+ * Tagwerk's design — shared by wall, phone and admin.
+ *
+ * Direction: a calm surface, one accent, and colour only where it means
+ * something — namely with the people. The canvas is almost white, cards are
+ * pure white and set off by a fine line instead of a tint. That keeps the
+ * colourful parts of the calendar reserved for the people, and the frame
+ * steps back.
+ *
+ * All colours run through the variables below. Components write
+ * `bg-surface` or `text-ink-2`, never `bg-white` or `text-slate-500` —
+ * otherwise every forgotten spot would stay light in the dark theme.
+ *
+ * Fonts ship in the package, not from a CDN: the wall tablet must also start
+ * without a network.
+ */
+@import "tailwindcss";
+@import "@fontsource-variable/plus-jakarta-sans";
+
+/* The components of this layer live outside the respective app and would
+   otherwise be missed when the classes are generated. */
+@source "../..";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme inline {
+  /* Through variables, so a design pack can swap font and corners. */
+  --font-sans: var(--font-body);
+  --font-display: var(--font-heading);
+
+  --radius-lg: var(--corner-lg);
+  --radius-xl: var(--corner-xl);
+  --radius-2xl: var(--corner-2xl);
+  --radius-3xl: var(--corner-3xl);
+
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-ink: var(--accent-ink);
+  --color-today: var(--today);
+  --color-today-ink: var(--today-ink);
+  --color-warning: var(--warning);
+  --color-warning-ink: var(--warning-ink);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-points: var(--points);
+  --color-points-ink: var(--points-ink);
+  --color-star: var(--star);
+  --color-scrim: var(--scrim);
+
+  --shadow-card: var(--elevation);
+  --shadow-floating: var(--elevation-floating);
+}
+
+/*
+ * Light: almost white, pure white cards, one terracotta.
+ *
+ * "Today" carries the same accent as every other highlighted state. A
+ * second brand colour just for the current day used to make the calendar
+ * restless — now it stands out through shape and surface, not through a
+ * tone of its own.
+ */
+:root {
+  color-scheme: light;
+
+  --font-body: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  /*
+   * Flatter corners than Tailwind's defaults. The components use
+   * `rounded-2xl` and `rounded-3xl`; through these steps the change applies
+   * everywhere without touching every card.
+   */
+  --corner-lg: 0.5rem;
+  --corner-xl: 0.625rem;
+  --corner-2xl: 0.75rem;
+  --corner-3xl: 0.875rem;
+
+  --canvas: #fafaf9;
+  --surface: #ffffff;
+  --surface-2: #efefec;
+  --surface-3: #e4e4df;
+  --line: #e3e3de;
+  --ink: #1a1a18;
+  --ink-2: #55554f;
+  --ink-3: #6a6a63;
+  --accent: #c2410c;
+  --accent-soft: #fdf1e9;
+  --accent-ink: #ffffff;
+  --today: #c2410c;
+  --today-ink: #ffffff;
+  --warning: #fef3c7;
+  --warning-ink: #92400e;
+  --danger: #b42318;
+  --danger-soft: #fee4e2;
+  --success: #067647;
+  --success-soft: #dcfae6;
+  --points: #fef3c7;
+  --points-ink: #92400e;
+  --star: #e8a200;
+  --scrim: rgb(16 16 18 / 0.45);
+
+  --elevation: 0 1px 2px rgb(16 16 18 / 0.06), 0 8px 24px -12px rgb(16 16 18 / 0.16);
+  --elevation-floating: 0 2px 6px rgb(16 16 18 / 0.08), 0 28px 64px -24px rgb(16 16 18 / 0.32);
+}
+
+/*
+ * Dark: deep neutral grey instead of black. Pure black with light text
+ * flickers in the corner of the eye on a wall tablet at night, and the
+ * people's colour areas would look like neon signs on it. The accent
+ * brightens so it does not sink into the dark canvas.
+ *
+ * The same values twice: once for the explicit choice, once for the system
+ * setting while no choice is known yet (for instance on the phone's sign-in
+ * page).
+ */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --canvas: #101012;
+  --surface: #1a1a1d;
+  --surface-2: #232327;
+  --surface-3: #2e2e33;
+  --line: #2a2a2e;
+  --ink: #ededef;
+  --ink-2: #b0b0b6;
+  --ink-3: #92929a;
+  --accent: #fdba74;
+  --accent-soft: #33231a;
+  --accent-ink: #101012;
+  --today: #fdba74;
+  --today-ink: #101012;
+  --warning: #3a2f14;
+  --warning-ink: #fde68a;
+  --danger: #fda29b;
+  --danger-soft: #3b2220;
+  --success: #75e0a7;
+  --success-soft: #1c3329;
+  --points: #3a2f14;
+  --points-ink: #fde68a;
+  --star: #fcc419;
+  --scrim: rgb(0 0 0 / 0.6);
+
+  --elevation: 0 0 0 1px rgb(255 255 255 / 0.04);
+  --elevation-floating: 0 0 0 1px rgb(255 255 255 / 0.07), 0 28px 64px -24px rgb(0 0 0 / 0.8);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+
+    --canvas: #101012;
+    --surface: #1a1a1d;
+    --surface-2: #232327;
+    --surface-3: #2e2e33;
+    --line: #2a2a2e;
+    --ink: #ededef;
+    --ink-2: #b0b0b6;
+    --ink-3: #92929a;
+    --accent: #fdba74;
+    --accent-soft: #33231a;
+    --accent-ink: #101012;
+    --today: #fdba74;
+    --today-ink: #101012;
+    --warning: #3a2f14;
+    --warning-ink: #fde68a;
+    --danger: #fda29b;
+    --danger-soft: #3b2220;
+    --success: #75e0a7;
+    --success-soft: #1c3329;
+    --points: #3a2f14;
+    --points-ink: #fde68a;
+    --star: #fcc419;
+    --scrim: rgb(0 0 0 / 0.6);
+
+    --elevation: 0 0 0 1px rgb(255 255 255 / 0.04);
+    --elevation-floating: 0 0 0 1px rgb(255 255 255 / 0.07), 0 28px 64px -24px rgb(0 0 0 / 0.8);
+  }
+}
+
+/*
+ * Glass look: translucent surfaces over the household's gradient.
+ *
+ * A second axis beside light and dark — `data-look` from the device's
+ * preference, `data-backdrop` from the household. Only tokens change; the
+ * components stay as they are.
+ *
+ * Blur only where something moves behind: dialogs, sheets and sticky bars.
+ * A panel on a still gradient looks the same with or without it, and every
+ * blurred layer costs the wall tablet's GPU on each frame.
+ */
+:root[data-look="glass"] {
+  --surface: rgb(255 255 255 / 0.55);
+  --surface-2: rgb(26 26 24 / 0.06);
+  --surface-3: rgb(26 26 24 / 0.11);
+  --line: rgb(26 26 24 / 0.1);
+  --accent-soft: rgb(194 65 12 / 0.12);
+  --tint-soft: rgb(255 255 255 / 0.8);
+  --tint-solid: rgb(255 255 255 / 0.94);
+  --glass-floating: rgb(255 255 255 / 0.74);
+
+  /* A light veil: a dark one leaves the blur nothing but black to show. */
+  --scrim: rgb(16 16 18 / 0.18);
+  --field: rgb(255 255 255 / 0.6);
+
+  --elevation: inset 0 1px 0 rgb(255 255 255 / 0.7), 0 0 0 1px rgb(255 255 255 / 0.65), 0 10px 32px -14px rgb(16 16 18 / 0.22);
+  --elevation-floating: inset 0 1px 0 rgb(255 255 255 / 0.8), 0 0 0 1px rgb(255 255 255 / 0.7), 0 28px 64px -24px rgb(16 16 18 / 0.4);
+}
+
+:root[data-look="glass"][data-theme="dark"] {
+  --surface: rgb(28 28 34 / 0.55);
+  --surface-2: rgb(255 255 255 / 0.07);
+  --surface-3: rgb(255 255 255 / 0.12);
+  --line: rgb(255 255 255 / 0.09);
+  --accent-soft: rgb(253 186 116 / 0.14);
+  --tint-soft: rgb(26 26 29 / 0.8);
+  --tint-solid: rgb(26 26 29 / 0.94);
+  --glass-floating: rgb(28 28 34 / 0.66);
+  --scrim: rgb(0 0 0 / 0.28);
+  --field: rgb(0 0 0 / 0.22);
+
+  --elevation: inset 0 1px 0 rgb(255 255 255 / 0.08), 0 0 0 1px rgb(255 255 255 / 0.06), 0 10px 32px -14px rgb(0 0 0 / 0.5);
+  --elevation-floating: inset 0 1px 0 rgb(255 255 255 / 0.1), 0 0 0 1px rgb(255 255 255 / 0.08), 0 28px 64px -24px rgb(0 0 0 / 0.8);
+}
+
+/*
+ * The gradients: soft light spots on a base tone. `--canvas` is the base,
+ * so the phone's status bar keeps a matching colour. Static on purpose — a
+ * moving gradient behind blur would be the most expensive thing on the wall.
+ */
+:root[data-look="glass"] {
+  --canvas: #f7ece4;
+  --backdrop: radial-gradient(at 12% 8%, #ffb990 0, transparent 55%), radial-gradient(at 88% 18%, #f6a5c0 0, transparent 50%), radial-gradient(at 55% 100%, #c6b8ff 0, transparent 60%);
+}
+
+:root[data-look="glass"][data-backdrop="lagoon"] {
+  --canvas: #e6f1f3;
+  --backdrop: radial-gradient(at 10% 10%, #8fdccf 0, transparent 55%), radial-gradient(at 90% 15%, #9fc0ff 0, transparent 50%), radial-gradient(at 45% 100%, #a8e6ff 0, transparent 60%);
+}
+
+:root[data-look="glass"][data-backdrop="meadow"] {
+  --canvas: #eef3e6;
+  --backdrop: radial-gradient(at 10% 12%, #b2e39b 0, transparent 55%), radial-gradient(at 88% 20%, #a8d8ef 0, transparent 50%), radial-gradient(at 50% 100%, #ece28a 0, transparent 60%);
+}
+
+:root[data-look="glass"][data-backdrop="dusk"] {
+  --canvas: #eeeaf6;
+  --backdrop: radial-gradient(at 12% 10%, #bea9ff 0, transparent 55%), radial-gradient(at 88% 18%, #ffadd2 0, transparent 50%), radial-gradient(at 50% 100%, #9fb8ff 0, transparent 60%);
+}
+
+:root[data-look="glass"][data-backdrop="sand"] {
+  --canvas: #f4efe6;
+  --backdrop: radial-gradient(at 12% 10%, #ecd0a0 0, transparent 55%), radial-gradient(at 88% 20%, #e2c3a8 0, transparent 50%), radial-gradient(at 50% 100%, #d4dcba 0, transparent 60%);
+}
+
+:root[data-look="glass"][data-backdrop="slate"] {
+  --canvas: #e9ecf0;
+  --backdrop: radial-gradient(at 12% 10%, #bfcad9 0, transparent 55%), radial-gradient(at 88% 18%, #d0d6df 0, transparent 50%), radial-gradient(at 50% 100%, #b5c2d4 0, transparent 60%);
+}
+
+:root[data-look="glass"][data-theme="dark"] {
+  --canvas: #1a1216;
+  --backdrop: radial-gradient(at 12% 8%, #5a2c1c 0, transparent 55%), radial-gradient(at 88% 18%, #4f1f36 0, transparent 50%), radial-gradient(at 55% 100%, #2e2558 0, transparent 60%);
+}
+
+:root[data-look="glass"][data-theme="dark"][data-backdrop="lagoon"] {
+  --canvas: #0d1719;
+  --backdrop: radial-gradient(at 10% 10%, #0f4a45 0, transparent 55%), radial-gradient(at 90% 15%, #1b3364 0, transparent 50%), radial-gradient(at 45% 100%, #0e3b52 0, transparent 60%);
+}
+
+:root[data-look="glass"][data-theme="dark"][data-backdrop="meadow"] {
+  --canvas: #111710;
+  --backdrop: radial-gradient(at 10% 12%, #24461d 0, transparent 55%), radial-gradient(at 88% 20%, #173d4f 0, transparent 50%), radial-gradient(at 50% 100%, #45401a 0, transparent 60%);
+}
+
+:root[data-look="glass"][data-theme="dark"][data-backdrop="dusk"] {
+  --canvas: #13111c;
+  --backdrop: radial-gradient(at 12% 10%, #35286b 0, transparent 55%), radial-gradient(at 88% 18%, #5a2048 0, transparent 50%), radial-gradient(at 50% 100%, #1d2e66 0, transparent 60%);
+}
+
+:root[data-look="glass"][data-theme="dark"][data-backdrop="sand"] {
+  --canvas: #18140f;
+  --backdrop: radial-gradient(at 12% 10%, #4a3a1f 0, transparent 55%), radial-gradient(at 88% 20%, #43301f 0, transparent 50%), radial-gradient(at 50% 100%, #2f3322 0, transparent 60%);
+}
+
+:root[data-look="glass"][data-theme="dark"][data-backdrop="slate"] {
+  --canvas: #111418;
+  --backdrop: radial-gradient(at 12% 10%, #26303d 0, transparent 55%), radial-gradient(at 88% 18%, #2c3038 0, transparent 50%), radial-gradient(at 50% 100%, #1e2836 0, transparent 60%);
+}
+
+/*
+ * Fixed to the screen, so a sticky bar in `bg-canvas` and the page below
+ * it show the same spot of the gradient — no seam where it sticks.
+ */
+:root[data-look="glass"],
+:root[data-look="glass"] .bg-canvas {
+  background-image: var(--backdrop);
+  background-attachment: fixed;
+}
+
+:root[data-look="glass"] :is(input, textarea, select).bg-canvas {
+  background-image: none;
+  background-color: var(--field);
+}
+
+:root[data-look="glass"] :is(.shadow-floating, .sticky) {
+  --surface: var(--glass-floating);
+
+  -webkit-backdrop-filter: blur(28px) saturate(1.6);
+  backdrop-filter: blur(28px) saturate(1.6);
+}
+
+/*
+ * A past event fades so the eye goes to what is ahead. On glass the card
+ * itself stays: faded as a whole, the gradient would shine through every
+ * event of the day by evening. Only its content fades there.
+ */
+.tw-past {
+  opacity: 0.5;
+}
+
+:root[data-look="glass"] .tw-past {
+  opacity: 1;
+}
+
+:root[data-look="glass"] .tw-past > * {
+  opacity: 0.5;
+}
+
+/* Whoever asked their system for less transparency gets solid glass. */
+@media (prefers-reduced-transparency: reduce) {
+  :root[data-look="glass"] {
+    --surface: rgb(255 255 255 / 0.94);
+    --glass-floating: #ffffff;
+  }
+
+  :root[data-look="glass"][data-theme="dark"] {
+    --surface: rgb(28 28 34 / 0.95);
+    --glass-floating: #1c1c22;
+  }
+
+  :root[data-look="glass"] :is(.shadow-floating, .sticky) {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@layer base {
+  html {
+    background-color: var(--canvas);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html,
+  body,
+  #__nuxt {
+    height: 100%;
+  }
+
+  /* Otherwise digits jump when points count up and in clock times. */
+  .tabular-nums,
+  time {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Focus visible only for the keyboard, but then clearly. */
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  button:not(:disabled),
+  [role="button"] {
+    cursor: pointer;
+  }
+
+  /*
+   * The system's "reduce motion" counts only until the app knows the
+   * device's switch; afterwards the switch decides (see `utils/motion.ts`).
+   */
+  @media (prefers-reduced-motion: reduce) {
+    :root:not([data-motion]) *,
+    :root:not([data-motion]) ::before,
+    :root:not([data-motion]) ::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* The device's own switch (`animations` preference) does the same. */
+  :root[data-motion="off"] *,
+  :root[data-motion="off"] ::before,
+  :root[data-motion="off"] ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /*
+   * A spinner says "wait" — it is not decoration and keeps turning with
+   * animations off. Same layer and more specific than the rules above:
+   * important declarations of an earlier layer would beat any later one.
+   */
+  :root .tw-spinner,
+  :root[data-motion="off"] .tw-spinner {
+    animation-duration: 0.8s !important;
+    animation-iteration-count: infinite !important;
+  }
+}
+
+/*
+ * A few small movements, all short and all switchable: `tw-pop` for
+ * something that just changed, the others for the smiley of an empty day.
+ * The repeating ones pause between rounds so the wall does not fidget.
+ */
+@keyframes tw-pop {
+  0% { transform: scale(0.6); opacity: 0; }
+  60% { transform: scale(1.12); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Once, never looping: a finished day jumps in and wiggles to a stop. */
+@keyframes tw-tada {
+  0% { transform: scale(0.2) rotate(-20deg); opacity: 0; }
+  35% { transform: scale(1.45) rotate(10deg); opacity: 1; }
+  50% { transform: scale(1.2) rotate(-8deg); }
+  65% { transform: scale(1.3) rotate(5deg); }
+  80% { transform: scale(1.05) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+@keyframes tw-fade-down {
+  from { transform: translateY(-6px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@utility tw-pop {
+  animation: tw-pop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@utility tw-tada {
+  animation: tw-tada 1.2s ease-out both;
+}
+
+@utility tw-fade-down {
+  animation: tw-fade-down 0.25s ease-out both;
+}
+
+/* Tiles and buttons give way a little under the finger. */
+@utility tw-press {
+  transition: transform 0.12s ease-out;
+
+  &:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+}
+
+/*
+ * The photo frame's slow zoom. It runs from large to normal, so that with
+ * animations off (duration cut to nothing) the picture rests uncropped.
+ */
+@keyframes tw-ken-burns {
+  from {
+    transform: scale(1.08);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@utility tw-ken-burns {
+  animation: tw-ken-burns 34s ease-out both;
+}
+
+/*
+ * Headings: the same family, just set tighter. No font weight here — the
+ * components set it themselves (`font-semibold`, `font-bold`), and a default
+ * at this point would win or lose depending on the order of the rules.
+ */
+@utility font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+  word-spacing: 0.06em;
+}

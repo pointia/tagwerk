@@ -1,0 +1,72 @@
+# Changelog
+
+Format based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+versioning according to [SemVer](https://semver.org/). Until 1.0.0 a minor
+release may still change the plugin API, the HTTP contract and the design
+tokens; such a change is named here.
+
+## [Unreleased]
+
+## [0.1.0] — 2026-11-04
+
+The first release. Everything a family uses from day to day, on a wall
+tablet and on the phone, from one self-hosted server for several
+households. Why it is shaped the way it is: `docs/architecture.md`.
+
+### Added
+
+- **Calendar** — built in, or Google and CalDAV in both directions; day,
+  three days, week, month and list, one column per person, school band.
+- **Tasks and routines** — taking turns, times of day, one per child,
+  paused in holidays; tap, confirm, then “who was that?”; four weeks to
+  catch up on from the phone.
+- **Stars and rewards** — day bonus, extra stars with a reason, gifts
+  between siblings, badges, reward requests; the parent PIN guards the
+  wall.
+- **Lists** — shopping lists in Tagwerk, mirrored to Bring in both
+  directions or pushed to Google Tasks.
+- **Meals and recipes** — week plan, portions by who eats, the family's own
+  book (typed, from a link, photographed, as a collection), Koch-Wiki and
+  Tandoor as sources, ingredients summed onto the list.
+- **Timetable** per child with bell schedule, holidays and cancellations.
+- **Dashboard** per tablet and per account, weather, resting mode with
+  dimming.
+- **Photo frame** from uploads and server folders in five layouts per
+  device, a library with favourites, albums and memories, a picture sent
+  from the phone to the wall.
+- **One app** for wall and phone, with push, realtime, light and dark, a
+  glass look and backgrounds.
+- **Languages** — German and English, more as language packs.
+- **Operation** — several households on one server, an operator with
+  support access, permissions per person, guests, one account in several
+  households, read-only households, export, move and deletion, notices and
+  messages, two-factor and social sign-in, a published image with a
+  Traefik or a Caddy setup.
+- **Plugins** — `tagwerk/plugin-api` (MIT) for providers, dashboard tiles,
+  photo rules, whole areas, extensions, notices, language packs and design
+  packs; a generator, a testkit and a template repository. Tagwerk's own:
+  API tokens, OpenAPI, calendar subscriptions, webhooks, MCP, CalDAV,
+  WebDAV backup, Bring, Koch-Wiki, two-factor, social sign-in.
+- **Own frontends** — `routes/api-contract.txt` fixes the HTTP contract,
+  `@tagwerk/client` (MIT, npm) talks to it, `TAGWERK_FRONTEND` serves
+  another frontend at `/`, `tagwerk-frontend-template` is the start.
+
+### Known limitations
+
+- **Signing in with Google from an iPhone home-screen app may land in
+  Safari.** iOS keeps the installed app's cookies apart; the way back from
+  Google opens in the browser, which then is signed in instead. Android is
+  not affected.
+- **The dashboard cannot be arranged on a phone.** Below `sm` the tiles
+  stack and the pencil is gone; an account arranges its dashboard on a
+  tablet or computer and sees the result stacked on its phone.
+- **e2e still runs per entry, not per area.** `wall.spec.ts` (tablet, wide)
+  and `mobile.spec.ts` (account, narrow) stay as they were; the crossings
+  are two smoke tests (`responsive.spec.ts`).
+- **Stored content stays in the language it was created in.** Starter
+  tasks, rewards and the first shopping list of a new household are rows,
+  not texts: they are written in the household's language at creation and do
+  not change when someone switches later.
+- **Amazon Photos cannot be synced automatically.** There is no interface;
+  pictures reach the server folder by download.
+- **A recipe's photographed pages do not travel in a collection export.**

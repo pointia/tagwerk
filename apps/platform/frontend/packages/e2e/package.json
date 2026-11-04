@@ -1,0 +1,13 @@
+{
+  "name": "e2e",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "e2e": "playwright test",
+    "screenshots": "playwright test -c screenshots.config.ts"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.63.0"
+  }
+}

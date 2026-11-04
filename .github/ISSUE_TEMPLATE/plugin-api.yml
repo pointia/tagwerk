@@ -1,0 +1,22 @@
+name: Plugin API
+description: The plugin API, the generator, the testkit or the guide lacks something or is wrong.
+labels: [plugin-api]
+body:
+  - type: textarea
+    id: plugin
+    attributes:
+      label: What your plugin does
+      description: One or two sentences, a link if it is public.
+    validations:
+      required: true
+  - type: textarea
+    id: missing
+    attributes:
+      label: What is missing or wrong
+      description: The contract, method or page, and what you would need instead.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: tagwerk/plugin-api version

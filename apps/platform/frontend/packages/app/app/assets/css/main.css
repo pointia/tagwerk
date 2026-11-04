@@ -1,0 +1,16 @@
+@import "../../../../shared/app/assets/css/tagwerk.css";
+
+/* The plugins' layers live outside the workspace, next to their PHP. */
+@source "../../../../../../plugins/*/frontend";
+
+body {
+  /* No overscroll, no double-tap zoom — on the wall and the phone alike. */
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
+/* Kiosk: no text selection. On the phone selecting text is allowed. */
+html[data-entry="device"] body {
+  -webkit-user-select: none;
+  user-select: none;
+}

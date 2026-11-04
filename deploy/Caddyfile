@@ -1,0 +1,28 @@
+# Used by compose.standalone.yaml. TAGWERK_SITE comes from .env: a host name
+# gets a certificate automatically, ":80" serves plain HTTP for a proxy in
+# front of this one.
+{
+	servers {
+		# Keep X-Forwarded-Proto from a proxy in front; otherwise Laravel
+		# would see http and build http links behind an HTTPS address.
+		trusted_proxies static private_ranges
+	}
+}
+
+{$TAGWERK_SITE} {
+	encode zstd gzip
+	reverse_proxy {
+		# Every app container, looked up again every few seconds: during
+		# ./rollout.sh the old and the new one run side by side.
+		dynamic a app 8080 {
+			refresh 5s
+		}
+		# A container still migrating refuses the connection, a removed one
+		# does not answer at all: give up on it quickly and try another.
+		lb_try_duration 15s
+		fail_duration 10s
+		transport http {
+			dial_timeout 1s
+		}
+	}
+}

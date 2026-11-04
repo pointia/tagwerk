@@ -1,0 +1,1 @@
+{ "plugins": { "exampleArea": { "hello": "Hello, {household} family!", "failed": "The example area cannot be reached right now." } } }

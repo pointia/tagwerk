@@ -1,0 +1,29 @@
+/*
+ * {{ title }} — a design for Tagwerk.
+ *
+ * Only Tagwerk's design tokens, listed with the core's values in
+ * vendor/tagwerk/plugin-api/resources/reference/design.json. Light on
+ * `:root[data-design]`, dark with `[data-theme="dark"]` — both are required,
+ * and text must stay readable on its background (WCAG AA) in both.
+ *
+ * Narrow by `[data-look="glass"]` or `[data-backdrop="…"]` to change the
+ * glass look; a rule wins where it narrows as far as the core's. Fonts and
+ * pictures lie beside this file (woff2, webp, png, jpg, avif) and are named
+ * by file name: `src: url(my-font.woff2)`.
+ */
+
+:root[data-design] {
+  --accent: #6d28d9;
+  --accent-soft: #f1eafd;
+  --accent-ink: #ffffff;
+  --today: #6d28d9;
+  --today-ink: #ffffff;
+}
+
+:root[data-design][data-theme="dark"] {
+  --accent: #c4b5fd;
+  --accent-soft: #2a2140;
+  --accent-ink: #15111f;
+  --today: #c4b5fd;
+  --today-ink: #15111f;
+}

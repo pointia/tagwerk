@@ -1,0 +1,33 @@
+{
+  "name": "@tagwerk/client",
+  "version": "0.1.0",
+  "description": "Talk to a Tagwerk server from your own frontend: session, sign-in, realtime, and the rules the official app applies",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./rules/*": "./src/rules/*.ts"
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+      "./rules/*": { "types": "./dist/rules/*.d.ts", "import": "./dist/rules/*.js" }
+    }
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "scripts": {
+    "test": "vitest run",
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "laravel-echo": "^2.6.1",
+    "pusher-js": "^8.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vitest": "^5.0.5"
+  }
+}

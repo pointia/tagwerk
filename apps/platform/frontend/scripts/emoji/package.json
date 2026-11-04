@@ -1,0 +1,13 @@
+{
+  "name": "tagwerk-emoji",
+  "private": true,
+  "type": "module",
+  "description": "Builds public/emoji from Microsoft's Fluent Emoji and CLDR search words; see build.mjs",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "emojibase-data": "17.0.0",
+    "svgo": "4.1.0"
+  }
+}

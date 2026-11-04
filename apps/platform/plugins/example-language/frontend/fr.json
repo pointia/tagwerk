@@ -1,0 +1,51 @@
+{
+  "common": {
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "remove": "Retirer",
+    "removeConfirm": "Vraiment retirer",
+    "changeNotSaved": "Modification non enregistrée.",
+    "failed": "Cela n’a pas fonctionné.",
+    "tryAgain": "Cela n’a pas fonctionné. Veuillez réessayer.",
+    "today": "Aujourd’hui",
+    "loading": "Chargement de Tagwerk …",
+    "fetching": "Chargement …",
+    "areas": "Rubriques",
+    "asOf": "État à {time}",
+    "offlineRetry": "Pas de connexion — réessayer",
+    "off": "Désactivé",
+    "delete": "Supprimer",
+    "deleteConfirm": "Vraiment supprimer",
+    "back": "Retour",
+    "removeNamed": "Retirer « {name} »",
+    "removeNamedConfirm": "Vraiment retirer « {name} »",
+    "removeAsk": "Retirer ?",
+    "loadingShort": "Chargement …",
+    "refresh": "Actualiser",
+    "yesterday": "Hier",
+    "retry": "Réessayer"
+  },
+  "pairing": {
+    "welcome": "Bienvenue sur Tagwerk",
+    "how": "Comment souhaitez-vous utiliser Tagwerk ?",
+    "wall": "Installer une tablette murale",
+    "phone": "Se connecter sur le téléphone",
+    "admin": "Administration",
+    "adminHint": "Configurer le foyer, les personnes et les appareils",
+    "setUp": "Installer Tagwerk",
+    "code": "Code d’appairage",
+    "connect": "Connecter"
+  },
+  "menu": {
+    "up": "Monter {area}",
+    "down": "Descendre {area}",
+    "show": "Afficher {area}",
+    "open": "Ouvrir le menu",
+    "close": "Fermer le menu",
+    "admin": "Administration"
+  },
+  "tabs": {
+    "photos": "Photos"
+  }
+}

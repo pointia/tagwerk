@@ -1,0 +1,16 @@
+{
+    "Brings in calendars from Nextcloud, iCloud, mailbox.org or any other CalDAV server and writes new events back.": "Holt Kalender aus Nextcloud, iCloud, mailbox.org oder jedem anderen CalDAV-Server und schreibt neue Termine zurück.",
+    "The address is the one your provider names for calendar apps — the server, your calendar home or a single calendar.": "Die Adresse ist die, die dein Anbieter für Kalender-Apps nennt – der Server, dein Kalenderverzeichnis oder ein einzelner Kalender.",
+    "Use an app password where your provider offers one (iCloud requires it), not your main password.": "Verwende ein App-Passwort, wo dein Anbieter eines anbietet (iCloud verlangt es), nicht dein Hauptpasswort.",
+    "The server must be reachable from the internet; an address in your home network is refused.": "Der Server muss aus dem Internet erreichbar sein; eine Adresse im Heimnetz wird abgelehnt.",
+    "Repeating events come over as single dates. To change one date of a series, use your calendar app.": "Serientermine kommen als einzelne Termine herüber. Einen Termin einer Serie änderst du in deiner Kalender-App.",
+    "Address": "Adresse",
+    "User name": "Benutzername",
+    "Password": "Passwort",
+    "The address starts with https://.": "Die Adresse beginnt mit https://.",
+    "The server knows no calendar with events for this account.": "Der Server kennt für dieses Konto keinen Kalender mit Terminen.",
+    "User name or password is wrong.": "Benutzername oder Passwort ist falsch.",
+    "Not reachable or not a public address.": "Nicht erreichbar oder keine öffentliche Adresse.",
+    "This does not look like a CalDAV address.": "Das sieht nicht nach einer CalDAV-Adresse aus.",
+    "This is one date of a repeating event. Change it in your calendar app.": "Das ist ein Termin einer Serie. Ändere ihn in deiner Kalender-App."
+}

@@ -1,0 +1,11 @@
+{
+    "Example area": "Beispielbereich",
+    "Example": "Beispiel",
+    "Shows how a plugin brings an area of its own.": "Zeigt, wie ein Plugin einen eigenen Bereich mitbringt.",
+    "Counter": "Zähler",
+    "Counts taps, to show buttons and settings.": "Zählt Tipper – zeigt Buttons und Einstellungen.",
+    "Name": "Name",
+    "Step": "Schritt",
+    "Add :step": ":step dazu",
+    "Reset": "Zurücksetzen"
+}

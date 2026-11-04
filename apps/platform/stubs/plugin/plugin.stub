@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+namespace {{ namespace }};
+
+use Tagwerk\PluginApi\Plugins\Catalog;
+use Tagwerk\PluginApi\Plugins\Plugin;
+{{ uses }}
+/**
+ * Loaded by Tagwerk through `extra.tagwerk.provider` in composer.json. An
+ * exception in here leaves the plugin out; the app keeps running, and
+ * Operations → Plugins shows why.
+ */
+final class {{ class }}Plugin extends Plugin
+{
+    public const KEY = '{{ name }}';
+
+    protected function registerPlugin(): void
+    {
+        $this->app->make(Catalog::class)->offer('{{ area }}', self::KEY, {{ offered }}::class);
+    }
+{{ boot }}}

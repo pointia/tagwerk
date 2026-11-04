@@ -1,0 +1,3 @@
+node_modules/
+# dist/ is committed: Tagwerk installs this package with Composer and serves
+# the built files as they are, without a build step on the server.

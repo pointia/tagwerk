@@ -987,8 +987,10 @@ final class WastePlugin extends \Tagwerk\PluginApi\Plugins\Plugin
     `export *` from a package. Source imports carry `.ts`
     (`rewriteRelativeImportExtensions` builds `.js` for npm); `exports`
     points at `src/` in the workspace, `publishConfig.exports` at `dist/`.
-    Published by the `npm` job in `split.yml` (`NPM_TOKEN`) when its
-    `version` is new.
+    Published by the `npm` job in `split.yml` when its `version` is new,
+    via npm's trusted publishing (OIDC, no token; the trusted publisher on
+    npmjs.com names `tagwerk-family/tagwerk` and `split.yml` — renaming the
+    file breaks publishing).
   - **`TAGWERK_FRONTEND`** installs a package with the plugins and
     `deploy/install-frontend.sh` points `/var/www/app` (a symlink; the
     official app is `/var/www/tagwerk-app`) at its `extra.tagwerk.app`

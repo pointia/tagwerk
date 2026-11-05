@@ -14,6 +14,9 @@ tokens; such a change is named here.
   for git, not for the image: set `TAGWERK_IMAGE` anew.
 - **Installing needs no checkout.** The README's setup is a `compose.yaml`
   and a `.env` written in place; the image carries everything else.
+- **`@tagwerk/client` is published through npm's trusted publishing.** npm
+  refuses tokens without two-factor bypass; GitHub's OIDC identity of
+  `split.yml` needs no token at all, so none can leak.
 
 ## [0.1.0] — 2026-11-04
 

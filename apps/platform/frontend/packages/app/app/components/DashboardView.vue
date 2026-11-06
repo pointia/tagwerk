@@ -12,7 +12,7 @@ import WidgetRewards from './widgets/WidgetRewards.vue'
 import WidgetStars from './widgets/WidgetStars.vue'
 import WidgetTasks from './widgets/WidgetTasks.vue'
 import WidgetWeather from './widgets/WidgetWeather.vue'
-import { COLUMNS, cellOffset, fits, resized, shifted, rows, stacked } from '~/utils/grid'
+import { COLUMNS, HALF_COLUMNS, cellOffset, fits, reflowed, resized, shifted, rows, stacked } from '~/utils/grid'
 
 const { t } = useI18n()
 
@@ -65,7 +65,30 @@ onMounted(load)
  * each as tall as it is on the grid. Arranging happens where the grid fits.
  */
 const narrow = useNarrow()
-const shown = computed(() => (narrow.value ? stacked(tiles.value) : tiles.value))
+
+/*
+ * Below `lg` — a tablet held upright — twelve columns made every tile a
+ * sliver: there the grid has half the columns, each tile twice as wide, set
+ * anew in reading order. Arranging stays with the landscape grid, which is
+ * the one stored.
+ */
+const half = useNarrow(1024)
+const columns = computed(() => (half.value ? HALF_COLUMNS : COLUMNS))
+const shown = computed(() => {
+  if (narrow.value) {
+    return stacked(tiles.value)
+  }
+
+  return half.value
+    ? reflowed(tiles.value.map(tile => ({ ...tile, h: Math.max(tile.h, UPRIGHT_MIN_ROWS[tile.type] ?? 0) })))
+    : tiles.value
+})
+
+/*
+ * Twice as wide, the clock's digits grow twice as tall (they follow the
+ * tile's width); two rows clipped them on a tablet 1024 pixels high.
+ */
+const UPRIGHT_MIN_ROWS: Record<string, number> = { clock: 3, weather: 3 }
 
 /** Rows are 72 pixels at least on the grid; a stacked tile keeps that. */
 const STACKED_ROW = 72
@@ -93,6 +116,14 @@ function tileStyle(tile: Tile): Record<string, string> {
  */
 const editMode = ref(false)
 const pickerOpen = ref(false)
+
+// Turned upright while arranging: the grid on screen is no longer the stored one.
+watch(half, (upright) => {
+  if (upright) {
+    editMode.value = false
+    pickerOpen.value = false
+  }
+})
 
 const pinOpen = ref(false)
 const pending = ref<(() => Promise<void>) | null>(null)
@@ -280,7 +311,7 @@ async function removeTile(id: number): Promise<void> {
       Floating in the corner instead of a bar of its own: the row above the
       grid cost a whole strip of the wall for one button.
     -->
-    <div v-if="!narrow" class="absolute right-3 bottom-3 z-10 flex items-center gap-2">
+    <div v-if="!half" class="absolute right-3 bottom-3 z-10 flex items-center gap-2">
       <button
         v-if="editMode"
         type="button"
@@ -328,7 +359,7 @@ async function removeTile(id: number): Promise<void> {
       data-testid="dashboard-grid"
       :class="narrow ? 'flex min-h-0 flex-1 flex-col overflow-y-auto' : 'grid min-h-0 flex-1 overflow-y-auto'"
       :style="narrow ? {} : {
-        gridTemplateColumns: `repeat(${COLUMNS}, minmax(0, 1fr))`,
+        gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
         gridAutoRows: `minmax(${STACKED_ROW}px, 1fr)`,
       }"
     >
@@ -430,6 +461,11 @@ async function removeTile(id: number): Promise<void> {
         {{ $t('dashboard.arrangeWide') }}
       </p>
     </div>
+
+    <!-- Outside the grid: there every row stretches to fill the screen. -->
+    <p v-if="half && !narrow" data-testid="dashboard-arrange-hint" class="mt-2 shrink-0 text-center text-sm text-ink-3">
+      {{ $t('dashboard.arrangeLandscape') }}
+    </p>
 
     <PhotoTileSource
       v-if="photoTile"

@@ -734,7 +734,10 @@ app/app/components/widgets/      one component per key
   404 — the household scope alone would let a phone move the wall's tiles.
   Deleting a device or account takes its tiles along. Below `sm` the tiles
   stack in reading order (`utils/grid.ts` `stacked()`), `h` × 72 px tall,
-  without the pencil; arranging happens where the grid fits.
+  without the pencil; arranging happens where the grid fits. From `sm` to
+  `lg` (a tablet held upright) `reflowed()` sets them on six columns, same
+  sizes, reading order, clock and weather at least three rows — display
+  only, the pencil is gone there too: what is stored is the landscape grid.
 - **Edit mode sits behind the parent PIN** on a tablet (`dashboard.arrange`,
   checked in `WallDashboardController`, not on the route: an account needs
   no permission for its own dashboard). Without a switch every accidental swipe on a wall in the hallway

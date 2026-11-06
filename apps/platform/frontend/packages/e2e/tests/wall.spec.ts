@@ -1016,6 +1016,24 @@ test('creates a tile, drags it and removes it again', async ({ page }) => {
 })
 
 /*
+ * Upright, twelve columns made every tile a sliver: there the grid has six,
+ * the landscape tiles set anew in reading order, arranging left to landscape.
+ */
+test('sets the dashboard on half the columns on an upright tablet', async ({ page }) => {
+  await page.setViewportSize({ width: 800, height: 1280 })
+  await pair(page)
+  await page.getByRole('button', { name: 'Start' }).click()
+
+  const raster = page.getByTestId('dashboard-grid')
+  await expect(raster).toHaveCSS('grid-template-columns', /^(\S+ ){5}\S+$/)
+  await expect(page.getByTestId('dashboard-edit')).toHaveCount(0)
+  await expect(page.getByTestId('dashboard-arrange-hint')).toHaveText('Anordnen lässt sich das Dashboard im Querformat.')
+
+  // Nothing pokes out sideways.
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(800)
+})
+
+/*
  * The single day shows columns per person. That is the view someone stands
  * in front of in the morning, wanting to know who has to go where today — a
  * shared column does not answer that.

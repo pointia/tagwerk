@@ -24,6 +24,13 @@ tokens; such a change is named here.
 
 ### Fixed
 
+- **The dashboard on an upright tablet.** Below `lg` the twelve columns of
+  the landscape grid left every tile some 150 pixels: the clock was cut off,
+  names shrank to one letter. There the grid now has six columns, each tile
+  keeps its size in columns and is set anew in reading order; arranging stays
+  in landscape, the only layout stored.
+- **The timetable's times no longer run into the lessons** on a narrow
+  screen: their column was too slim for `08:00`.
 - **The app shows a favicon.** Its head linked no icon, so browsers asked
   for `/favicon.ico`, which nginx hands to Laravel's empty file; the head now
   names `icon.svg`, which nginx already served for exactly that purpose.

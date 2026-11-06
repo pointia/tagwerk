@@ -32,8 +32,8 @@ export function overlaps(a: Placement, b: Placement): boolean {
  * Overlaps are prevented instead of resolved: a grid that rearranges itself
  * on drop surprises everyone watching.
  */
-export function fits(placement: Placement, tiles: Tile[], exceptId?: number): boolean {
-  if (placement.x < 0 || placement.y < 0 || placement.x + placement.w > COLUMNS) {
+export function fits(placement: Placement, tiles: Tile[], exceptId?: number, columns = COLUMNS): boolean {
+  if (placement.x < 0 || placement.y < 0 || placement.x + placement.w > columns) {
     return false
   }
 
@@ -41,12 +41,12 @@ export function fits(placement: Placement, tiles: Tile[], exceptId?: number): bo
 }
 
 /** The first free cell from the top left — null when nothing fits anymore. */
-export function freeCell(tiles: Tile[], w: number, h: number): Placement | null {
+export function freeCell(tiles: Tile[], w: number, h: number, columns = COLUMNS): Placement | null {
   for (let y = 0; y < MAX_ROWS; y++) {
-    for (let x = 0; x + w <= COLUMNS; x++) {
+    for (let x = 0; x + w <= columns; x++) {
       const placement = { x, y, w, h }
 
-      if (fits(placement, tiles)) {
+      if (fits(placement, tiles, undefined, columns)) {
         return placement
       }
     }
@@ -92,4 +92,26 @@ export function rows(tiles: Tile[], atLeast = 6): number {
 /** Below phone width the tiles stack in reading order: row by row, left to right. */
 export function stacked<T extends Placement>(tiles: T[]): T[] {
   return [...tiles].sort((a, b) => a.y - b.y || a.x - b.x)
+}
+
+/** Columns of the grid between phone and landscape, e.g. a tablet held upright. */
+export const HALF_COLUMNS = 6
+
+/**
+ * The grid for half the width: every tile keeps its size in columns, so it
+ * is twice as wide as in landscape, and they are set anew in reading order.
+ * Display only — the stored placement stays the landscape one.
+ */
+export function reflowed<T extends Tile>(tiles: T[], columns = HALF_COLUMNS): T[] {
+  const placed: T[] = []
+
+  for (const tile of stacked(tiles)) {
+    const w = Math.min(tile.w, columns)
+    const cell = freeCell(placed, w, tile.h, columns)
+      ?? { x: 0, y: rows(placed, 0), w, h: tile.h }
+
+    placed.push({ ...tile, ...cell })
+  }
+
+  return placed
 }

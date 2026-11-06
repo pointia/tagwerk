@@ -163,7 +163,7 @@ onMounted(load)
         <table class="w-full table-fixed border-separate border-spacing-0.5 @3xl:border-spacing-1">
           <thead>
             <tr>
-              <th class="w-7 @3xl:w-14" />
+              <th class="w-11 @3xl:w-14" />
               <th
                 v-for="day in days"
                 :key="day.date"

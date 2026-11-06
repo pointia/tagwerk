@@ -24,7 +24,7 @@ services:
       dockerfile: deploy/Dockerfile
       args:
         TAGWERK_AUDIT: ${TAGWERK_AUDIT:-strict}
-    image: tagwerk-app
+    image: ${TAGWERK_IMAGE:-tagwerk-app}
     restart: unless-stopped
     env_file: .env
     environment:
@@ -79,7 +79,7 @@ services:
 
   reverb:
     profiles: [realtime]
-    image: tagwerk-app
+    image: ${TAGWERK_IMAGE:-tagwerk-app}
     restart: unless-stopped
     env_file: .env
     command: ["su-exec", "www-data", "php", "artisan", "reverb:start", "--host=0.0.0.0", "--port=8080"]

@@ -14,9 +14,19 @@ tokens; such a change is named here.
   for git, not for the image: set `TAGWERK_IMAGE` anew.
 - **Installing needs no checkout.** The README's setup is a `compose.yaml`
   and a `.env` written in place; the image carries everything else.
+- **The Traefik setup pulls the published image too.** `compose.yaml`
+  ignored `TAGWERK_IMAGE` and always built on the server; it now follows it
+  like the standalone setup, and `tagwerk-app` still builds from the
+  checkout.
 - **`@tagwerk/client` is published through npm's trusted publishing.** npm
   refuses tokens without two-factor bypass; GitHub's OIDC identity of
   `split.yml` needs no token at all, so none can leak.
+
+### Fixed
+
+- **The app shows a favicon.** Its head linked no icon, so browsers asked
+  for `/favicon.ico`, which nginx hands to Laravel's empty file; the head now
+  names `icon.svg`, which nginx already served for exactly that purpose.
 
 ## [0.1.0] — 2026-11-04
 

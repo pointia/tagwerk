@@ -38,7 +38,7 @@ one container, PostgreSQL beside it.
 |---|---|---|
 | For | a home server, a NAS, a small VPS | a server that already runs Traefik |
 | HTTPS | Caddy in the stack fetches the certificate, or a proxy you already run | Traefik's certificate resolver |
-| Image | the published `ghcr.io/tagwerk-family/tagwerk` (or built from the source) | built from the source on the server |
+| Image | the published `ghcr.io/tagwerk-family/tagwerk` (or built from the source) | the same |
 | Ports | 80 and 443 (or one port of your choice behind your own proxy) | none; Traefik reaches the container over its network |
 
 If you are unsure, take **standalone**.
@@ -54,8 +54,8 @@ cp .env.example .env
 ```
 
 Everything below happens in `deploy/`. The checkout is needed for the
-compose files, the Caddyfile and the scripts — and, for the Traefik setup,
-for building the image.
+compose files, the Caddyfile and the scripts — and for building the image
+yourself, if you want to.
 
 ### 2. Fill in `.env`
 
@@ -99,10 +99,10 @@ To build from the checkout instead of pulling, set
 
 **Behind Traefik:** Traefik must be on a Docker network named `web` (or the
 one in `TRAEFIK_NETWORK`), with an entrypoint `websecure` and a certificate
-resolver `letsencrypt` (or yours in `TRAEFIK_*`).
+resolver `letsencrypt` (or yours in `TRAEFIK_*`). Like standalone it pulls
+`TAGWERK_IMAGE`; with `tagwerk-app` run `docker compose build` first.
 
 ```bash
-docker compose build
 docker compose up -d
 ```
 

@@ -40,7 +40,7 @@ einem Container, PostgreSQL daneben.
 |---|---|---|
 | Für | Heimserver, NAS, kleiner VPS | einen Server, auf dem Traefik schon läuft |
 | HTTPS | Caddy im Stack holt das Zertifikat, oder ein Proxy, den du schon betreibst | Zertifikats-Resolver von Traefik |
-| Image | das veröffentlichte `ghcr.io/tagwerk-family/tagwerk` (oder aus dem Quellcode gebaut) | am Server aus dem Quellcode gebaut |
+| Image | das veröffentlichte `ghcr.io/tagwerk-family/tagwerk` (oder aus dem Quellcode gebaut) | dasselbe |
 | Ports | 80 und 443 (oder ein beliebiger Port hinter deinem eigenen Proxy) | keine; Traefik erreicht den Container über sein Netzwerk |
 
 Im Zweifel: **eigenständig**.
@@ -56,8 +56,8 @@ cp .env.example .env
 ```
 
 Alles Weitere passiert in `deploy/`. Der Checkout liefert die
-Compose-Dateien, die Caddyfile und die Skripte — und beim Aufbau mit
-Traefik den Quellcode für das Image.
+Compose-Dateien, die Caddyfile und die Skripte — und den Quellcode, falls
+du das Image selbst bauen willst.
 
 ### 2. `.env` ausfüllen
 
@@ -102,10 +102,11 @@ Um statt zu laden aus dem Checkout zu bauen, `TAGWERK_IMAGE=tagwerk-app` in
 
 **Hinter Traefik:** Traefik muss an einem Docker-Netzwerk namens `web`
 hängen (oder dem aus `TRAEFIK_NETWORK`), mit dem Entrypoint `websecure` und
-dem Zertifikats-Resolver `letsencrypt` (oder deinen in `TRAEFIK_*`).
+dem Zertifikats-Resolver `letsencrypt` (oder deinen in `TRAEFIK_*`). Wie
+beim eigenständigen Aufbau wird `TAGWERK_IMAGE` geladen; mit `tagwerk-app`
+vorher `docker compose build` ausführen.
 
 ```bash
-docker compose build
 docker compose up -d
 ```
 

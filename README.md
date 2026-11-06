@@ -26,7 +26,7 @@ Docker with Compose is all it takes — no checkout. In an empty folder:
 cat > compose.yaml <<'EOF'
 services:
   app:
-    image: ghcr.io/tagwerk-family/tagwerk:0.1
+    image: ghcr.io/tagwerk-family/tagwerk:latest
     restart: unless-stopped
     depends_on: { db: { condition: service_healthy } }
     environment:
@@ -83,7 +83,7 @@ household. Keep `.env` safe: without `APP_KEY` the stored credentials cannot
 be read.
 
 The image `ghcr.io/tagwerk-family/tagwerk` runs on amd64 and arm64
-(Raspberry Pi 4/5); `:0.1` follows the bug fixes of 0.1. This setup runs
+(Raspberry Pi 4/5); `:latest` is the newest release. This setup runs
 without mail (accounts get a password in the admin) and without realtime.
 Mail, plugins, Traefik or a proxy you already run, updates without
 downtime, backup and troubleshooting:

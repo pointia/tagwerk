@@ -26,7 +26,7 @@ Es braucht nur Docker mit Compose, keinen Checkout. In einem leeren Ordner:
 cat > compose.yaml <<'EOF'
 services:
   app:
-    image: ghcr.io/tagwerk-family/tagwerk:0.1
+    image: ghcr.io/tagwerk-family/tagwerk:latest
     restart: unless-stopped
     depends_on: { db: { condition: service_healthy } }
     environment:
@@ -83,7 +83,7 @@ Haushalt anlegen. Die `.env` gut aufheben: Ohne `APP_KEY` sind die
 gespeicherten Zugangsdaten nicht mehr lesbar.
 
 Das Image `ghcr.io/tagwerk-family/tagwerk` läuft auf amd64 und arm64
-(Raspberry Pi 4/5); `:0.1` folgt den Fehlerbehebungen von 0.1. So läuft
+(Raspberry Pi 4/5); `:latest` ist der neueste Release. So läuft
 Tagwerk ohne Mail (Konten bekommen ihr Passwort im Admin) und ohne
 Echtzeit. Mail, Plugins, Traefik oder ein Proxy, den du schon betreibst,
 Aktualisieren ohne Ausfall, Sicherung und Fehlersuche:

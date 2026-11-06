@@ -33,7 +33,10 @@ export default defineNuxtConfig({
     head: {
       title: 'Tagwerk',
       htmlAttrs: { lang: 'de' },
-      link: [{ rel: 'manifest', href: '/manifest.webmanifest' }],
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/icon.svg' },
+        { rel: 'manifest', href: '/manifest.webmanifest' },
+      ],
       meta: [
         { name: 'theme-color', content: '#f6f6f4' },
 

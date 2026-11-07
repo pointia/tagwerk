@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
+use App\Enums\Feature;
 use App\Jobs\SendPushNotificationJob;
 use App\Models\Household;
 use App\Services\DailySummary;
@@ -67,6 +68,7 @@ final class SendDailySummaryCommand extends Command
                 'title' => __('Daily summary'),
                 'body' => $texts[app()->getLocale()],
                 'tag' => 'daily-summary',
+                'url' => '/?area='.Feature::Tasks->wallMode(),
             ]), adultsOnly: true);
 
             $sent++;

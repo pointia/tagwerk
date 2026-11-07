@@ -41,3 +41,19 @@ export function householdFromUrl(search: string, households: { id: number, curre
 
   return target && !target.current ? target.id : null
 }
+
+/**
+ * The area a link leads to (`?area=`) — a tapped notification names where it
+ * is handled. Only a key's shape is checked here; the shell drops an area
+ * the household does not have (`validMode`).
+ */
+export function areaFromUrl(search: string): string | null {
+  const area = new URLSearchParams(search).get('area')
+
+  return area !== null && /^[a-z0-9_-]+(\/[a-z0-9_-]+)?$/.test(area) ? area : null
+}
+
+/** Where an account remembers its area for the session, per household. */
+export function modeKey(householdId: number | undefined): string {
+  return `tagwerk-tab-${householdId ?? ''}`
+}

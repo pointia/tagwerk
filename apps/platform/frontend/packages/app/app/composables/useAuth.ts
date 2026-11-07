@@ -1,6 +1,6 @@
 import type { HouseholdNotice } from '../../../shared/app/utils/notice'
 import type { Language } from '../../../shared/app/utils/language'
-import { householdFromUrl } from '~/utils/entry'
+import { areaFromUrl, householdFromUrl, modeKey } from '~/utils/entry'
 
 /** The service worker's cache (`public/sw.js`); emptied when the household changes. */
 const OFFLINE_CACHE = 'tagwerk-wall-v1'
@@ -269,16 +269,32 @@ export function useAuth() {
   }
 
   /*
-   * A tapped notification names its household; the parameter goes from the
-   * address at once, so a reload does not switch back.
+   * A tapped notification names its household and the area that handles it;
+   * the parameters go from the address at once, so a reload does not switch
+   * back. The area becomes the one the account remembers for that household's
+   * session — the shell starts there, after the household switch's reload too.
    */
   function followNotification(): void {
-    if (!new URLSearchParams(window.location.search).has('household')) {
+    const search = window.location.search
+    const query = new URLSearchParams(search)
+
+    if (!query.has('household') && !query.has('area')) {
       return
     }
 
-    const target = householdFromUrl(window.location.search, user.value?.households ?? [])
+    const households = user.value?.households ?? []
+    const target = householdFromUrl(search, households)
+    const area = areaFromUrl(search)
     window.history.replaceState(null, '', window.location.pathname)
+
+    if (area !== null) {
+      try {
+        sessionStorage.setItem(modeKey(target ?? households.find(entry => entry.current)?.id), area)
+      }
+      catch {
+        // Blocked storage (private window): the start area applies.
+      }
+    }
 
     if (target !== null) {
       void switchHousehold(target)

@@ -4,6 +4,7 @@ import { intlLocale } from '../../../shared/app/utils/intlLocale'
 import type { ListItemDto } from '~/composables/useLists'
 import type { OccurrenceDto } from '../../../shared/app/composables/useTasks'
 import { type Area, type Mode, validMode } from '~/utils/areas'
+import { modeKey } from '~/utils/entry'
 import { areaEmoji } from '../../../shared/app/utils/areaEmoji'
 import { arranged } from '../../../shared/app/utils/menu'
 import type { Lesson } from '../../../shared/app/utils/timetable'
@@ -517,7 +518,7 @@ async function applyPreferences(): Promise<void> {
  * in its start area — after a power cut the important things show at once.
  * Per household: the other family may have switched that area off.
  */
-const MODE_KEY = computed(() => `tagwerk-tab-${user.value?.households?.find(entry => entry.current)?.id ?? ''}`)
+const MODE_KEY = computed(() => modeKey(user.value?.households?.find(entry => entry.current)?.id))
 
 function storedMode(): Mode | null {
   try {

@@ -51,6 +51,16 @@ final class NotificationsTest extends TestCase
         Queue::assertPushed(AnnounceHouseholdUpdateJob::class, fn (AnnounceHouseholdUpdateJob $job): bool => $job->area === 'notifications');
     }
 
+    public function test_a_reward_request_leads_to_the_stars(): void
+    {
+        $message = new RewardRequested((int) $this->household->id, 'Max', 'Kino', 20);
+        $this->parent->notifyNow($message);
+
+        $this->assertSame('/?area=points', $message->toPush($this->parent)['url'] ?? null);
+        $this->actingAs($this->parent)->getJson('/api/notifications')
+            ->assertJsonPath('items.0.url', '/?area=points');
+    }
+
     public function test_the_app_lists_and_marks_read(): void
     {
         $this->parent->notifyNow(new HouseholdMovedIn((int) $this->household->id, 'Müller', []));

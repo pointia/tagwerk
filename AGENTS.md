@@ -2248,6 +2248,14 @@ describe the procedures.
   in `HouseholdExport::SYSTEM`. Tests use `Notification::fake()`; a
   household-wide broadcast without recipients (the daily summary) stays a
   `SendPushNotificationJob`.
+- **A message leads to where it is handled**: `link()` (or a push payload's
+  `url`) names the area as `/?area=<wallMode>` — without one a tap lands
+  on the start page. `useAuth().followNotification()` strips `?area=` and
+  `?household=` from the address and writes the area into the session's
+  remembered area of that household (`modeKey()`, `utils/entry.ts`), so the
+  shell starts there, after a household switch's reload too; `validMode`
+  drops an area the household has off. Accounts only — a tablet always
+  starts in its start area.
 - **Deleting goes through `HouseholdDeletion`** — the operator's action, the
   account's self-deletion (`AccountDeletion`, `GET|DELETE /api/auth/account`,
   allowed while read-only) and the hosted service's purge alike. It

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Notifications;
 
+use App\Enums\Feature;
+
 /**
  * A child asked for a reward at the wall. The only message that has to
  * reach someone on its own: otherwise the request waits at the tablet
@@ -27,6 +29,12 @@ final class RewardRequested extends HouseholdMessage
             'name' => $this->person,
             'reward' => $this->reward,
         ]);
+    }
+
+    /** Straight to the stars, where the request waits for approval. */
+    public function link(): string
+    {
+        return '/?area='.Feature::Points->wallMode();
     }
 
     public function push(): string

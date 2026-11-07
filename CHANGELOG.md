@@ -24,6 +24,10 @@ tokens; such a change is named here.
 
 ### Fixed
 
+- **A tapped notification opens where it is handled.** A reward request
+  leads to the stars, the daily summary to the tasks. The messages carried
+  no link, so the push fell back to `/`, and the app opened the account's
+  start area.
 - **The dashboard on an upright tablet.** Below `lg` the twelve columns of
   the landscape grid left every tile some 150 pixels: the clock was cut off,
   names shrank to one letter. There the grid now has six columns, each tile
